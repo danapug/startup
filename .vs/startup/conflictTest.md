@@ -1,2 +1,2 @@
 //This is the beginning of my startup project
-//edited this line on github
+github edit, for merge conflict
