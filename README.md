@@ -9,7 +9,7 @@ The budget tracker website is targeted to college students who are unaware of ho
 
 **Design:**
 
-	![Budget Design Layout](https://github.com/danapug/startup/assets/156227779/5c06f52a-08f1-4cf8-a961-eb56ff007d68)
+	![Budget Design Layout](https://github.com/danapug/startup/assets/156227779/bbe4ba36-845d-4bc6-a9a0-2680df58991d)
 	 	 	 
 
 
