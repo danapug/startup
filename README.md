@@ -1,19 +1,20 @@
 # **Budget**
 
 ### Specification Deliverable
-**Elevator Pitch:** 
+#### **Elevator Pitch:** 
 
-The budget tracker website is targeted to college students who are unaware of how much money they spend each week and 			specifically in what areas (food, activities, rent, tuition) they spend the most. This website will allow students to become 		their own masters and take control of their expenses to allow less stress in regards to finances. The app will allow them to 		input expenses in each major category and input their income. If the individual was successful at not spending more than they 		made, than a inspirational quote about saving money will appear and they will be placed somewhere on the leaderboard, if not they 	will get a quote on staying with in your means and not going in debt. The leaderboard scores will be calculated based on if you 	stayed with in your budget and if so, and how much money you put towards your savings based on your income (this will be a 		percentage). Understanding and managing your expenses and income will allow you to experience true financial freedom.
+Are you stressed with budgeting and finances? The budget tracker website is perfect for college students who are unaware of how much money they spend each week . This app will allow students to become their own masters and take control of their expenses. Users can input budget price goals and actual amounts for income and expenses in each category. Understanding and managing your expenses will allow you to experience true financial freedom!
 
 
 
-**Design:**
+#### **Design:**
 
-	![Budget Design Layout](https://github.com/danapug/startup/assets/156227779/bbe4ba36-845d-4bc6-a9a0-2680df58991d)
+	![Budget Design Layout](https://github.com/danapug/startup/assets/156227779/92413e6a-c19f-4d4d-8aae-786a4fa26e24)
+
 	 	 	 
 
 
-**Key Features:**
+#### **Key Features:**
 
 • Secure login over HTTPS
 
@@ -25,9 +26,14 @@ The budget tracker website is targeted to college students who are unaware of ho
 
 • Displays a motivational quote to keep saving
 
+• Realtime leaderboard scores posted based on savings and income percentage 
 
 
-**Technologies:**
+
+
+
+
+#### **Technologies:**
 
 • **HTML -** Uses correct HTML structure for application. Two HTML pages. One for login and one for budgeting. 
  
@@ -35,9 +41,7 @@ The budget tracker website is targeted to college students who are unaware of ho
  
 • **JavaScript -** Provides login, category display, user input for how much they wanted to budget and how much they actually 				did, and display how well they saved in regards to other people using the app (will not show monetary value, but 			instead be a percentage).
  
-• **Service -** Backend service with endpoints for:
-    				o login
-    				o retrieving input for each category
+• **Service -** Backend service with endpoints for login and retrieving input for each category.
 	
 • **DB/Login -** Store users, budget goal, and actual amount spent in database. Register and login users. Credentials securely 				stored in database. Can't use the budget until authenticated.
  
