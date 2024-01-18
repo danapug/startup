@@ -3,13 +3,14 @@
 ### Specification Deliverable
 #### **Elevator Pitch:** 
 
-Are you stressed with budgeting and finances? The budget tracker website is perfect for college students who are unaware of how much money they spend each week . This app will allow students to become their own masters and take control of their expenses. Users can input budget price goals and actual amounts for income and expenses in each category. Understanding and managing your expenses will allow you to experience true financial freedom!
+Does budgeting and finances feel daunting? The Budget Tracker is perfect for college students because it is user friendly, efficient, and will create financial awareness. Budget Tracker will allow users to become their own masters and take control of their expenses. Users can input budget price goals and actual amounts for income and expenses in each category. Understanding and managing expenses will allow college students to begin developing financial freedom and independence early on!
 
 
 
 #### **Design:**
 
-	![Budget Design Layout](https://github.com/danapug/startup/assets/156227779/92413e6a-c19f-4d4d-8aae-786a4fa26e24)
+![Budget Design Layout](https://github.com/danapug/startup/assets/156227779/b7c1059b-f87d-4c8f-85e7-92dfd65619cb)
+
 
 	 	 	 
 
@@ -22,9 +23,9 @@ Are you stressed with budgeting and finances? The budget tracker website is perf
 
 • User input for each category
 
-• Displays the variance in dollars of expected and actual
+• Displays the dollar variance between expected and actual for each category
 
-• Displays a motivational quote to keep saving
+• Displays a motivational quote about budgets and saving
 
 • Realtime leaderboard scores posted based on savings and income percentage 
 
@@ -39,13 +40,13 @@ Are you stressed with budgeting and finances? The budget tracker website is perf
  
 • **CSS –** An appealing and user-friendly budget application with proper font, color choice, and contrast. 
  
-• **JavaScript -** Provides login, category display, user input for how much they wanted to budget and how much they actually 				did, and display how well they saved in regards to other people using the app (will not show monetary value, but 			instead be a percentage).
+• **JavaScript -** Provides login, category display, user input for goal and actual amount budgeted, and displays a leaderboard percentage of how well the user stayed within budget in regards to the other users (will not show monetary value, but instead be a percentage based on income and staying within budget).
  
-• **Service -** Backend service with endpoints for login and retrieving input for each category.
+• **Service -** Backend service with endpoints for login, retrieving input for each budget category, and retrieving motivational quotes about budgeting from another service/website.
 	
-• **DB/Login -** Store users, budget goal, and actual amount spent in database. Register and login users. Credentials securely 				stored in database. Can't use the budget until authenticated.
+• **DB/Login -** Store users, user's budget goals, and user's actual amount spent in the database. Register and login users. Credentials securely stored in database. The user can't use the budget tab until they sign-in.
  
-• **WebSocket -** As each user fills out the budget, their overall savings percentage compared to their expenses and income are 			broadcast to all other users.
+• **WebSocket -** As each user fills out the budget, a savings percentage in regards to how well they stayed within budget will be broadcast to other users.
  
 • **React -** Application ported to use the React web framework.
 
