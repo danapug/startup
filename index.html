@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <!-- Tell browsers not to scale the viewport automatically -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Budget Tracker</title>
+        <style>
+            hr {
+                border: .5px solid black; 
+                margin-top: 0; 
+                margin-bottom: 15px; /* Add margin between header and main content */
+            }
+        </style>
     </head>
+    
 
     <body>
         <header>
@@ -18,16 +25,22 @@
                 </menu>
             </nav>
         </header>
+        <hr>
 
         <main> 
             <h1>Welcome</h1>
             <p>Login to start budgeting</p>
             <form method="get" action="budget.html">
-                <label for="name">Name</label>
+                <label for="name">Username</label>
                 <input type="text" id="name" placeholder="Your name here" />
+
+                <label for="pass">Password</label>
+                <input type="text" id="pass" placeholder="Your password here" />
+
                 <button type="submit">Login</button>
             </form>
         </main>
+
         <footer>
             <hr>
             <span class = "text-reset"> Author</span>
@@ -36,5 +49,4 @@
         </footer>
 
     </body>
-
 </html>
