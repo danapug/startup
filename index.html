@@ -9,6 +9,9 @@
                 margin-top: 0; 
                 margin-bottom: 15px; /* Add margin between header and main content */
             }
+            button {
+                margin-bottom:15px;
+            }
         </style>
     </head>
     
@@ -18,7 +21,7 @@
             <h1>Budget Tracker</h1>
             <nav> 
                 <menu>
-                    <li><a href="login.html"> Home</a></li>
+                    <li><a href="index.html"> Home</a></li>
                     <li><a href="budget.html"> Budget</a> </li>
                     <li><a href="scoreboard.html"> Scoreboard</a></li>
                     <li><a href="about.html"> About</a></li>
@@ -31,12 +34,12 @@
             <h1>Welcome</h1>
             <p>Login to start budgeting</p>
             <form method="get" action="budget.html">
-                <label for="name">Username</label>
+                <label for="name">Username:</label>
                 <input type="text" id="name" placeholder="Your name here" />
-
-                <label for="pass">Password</label>
+                <div>
+                <label for="pass">Password:</label>
                 <input type="text" id="pass" placeholder="Your password here" />
-
+                </div>
                 <button type="submit">Login</button>
             </form>
         </main>
