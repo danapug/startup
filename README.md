@@ -51,3 +51,20 @@ Does budgeting and finances feel daunting? The Budget Tracker is perfect for col
 • **React -** Application ported to use the React web framework.
 
 
+
+### HTML Deliverable
+# <span style="border-bottom: 2px solid black;"></span>
+• **HTML Pages -** Four HTML pages were created; home page, about page, budget page, and scoreboard page. HTML tags were used.
+
+• **Links -** The home page (once you login) automatically links the user to the budget page. The budget page also has a submit button that will save all their information to the database, but it just brings them back to the budget tab for now.
+
+• **Text -** The budget template and “About” page have a lot of textual descriptions.
+
+• **Placeholder for 3rd party service calls -** Retrieved a saving quote from another service/website.
+
+• **Images -** Uploaded an image from another website on my “About” tab. 
+
+• **DB/Login -** Input box for a username and password and a submit button for login. The user’s data from the budget spreadsheet will be stored in the database.
+
+• **WebSocket -** As the budget is used, a savings percentage based on how the user stayed within their budget will be broadcast on the scoreboard.
+
