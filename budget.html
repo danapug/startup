@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Budget Tracker</title>
+        <style>
+            hr {
+                border: .5px solid black; 
+                margin-top: 0; 
+                margin-bottom: 15px; /* Add margin between header and main content */
+            }
+        </style>
+    </head>
+
+
+    <body>
+        <header>
+            <h1>Budget Tracker</h1>
+            <nav> 
+                <menu>
+                    <li><a href="index.html"> Home</a></li>
+                    <li><a href="budget.html"> Budget</a> </li>
+                    <li><a href="scoreboard.html"> Scoreboard</a></li>
+                    <li><a href="about.html"> About</a></li>
+                </menu>
+            </nav>
+        </header>
+        <hr>
+
+        <main> 
+            <h1>Budget Categories</h1>
+            <form method="get" action="budget.html">
+                <p>Income</p>
+                <p>Scholarship</p>
+                <input type="text" id="name" placeholder="Scholarship Amount" />
+                <p>Financial Aid</p>
+                <input type="text" id="name" placeholder="Financial Aid Amount" />
+                <p>Income from Job</p>
+                <input type="text" id="name" placeholder="Income Amount" />
+
+                <p>Expenses</p>
+                <p>Rent/Housing</p>
+                <input type="text" id="name" placeholder="Rent/Housing Amount" />
+                <p>Gas</p>
+                <input type="text" id="name" placeholder="Gas Amount" />
+                <p>Tuition</p>
+                <input type="text" id="name" placeholder="Tuition Amount" />
+                <p>Insurance</p>
+                <input type="text" id="name" placeholder="Insurance Amount" />
+                <p>Books</p>
+                <input type="text" id="name" placeholder="Books Amount" />
+                <p>Activities</p>
+                <input type="text" id="name" placeholder="Activites Amount" />
+                <p>Groceries</p>
+                <input type="text" id="name" placeholder="Groceries Amount" />
+
+                <p>Savings</p>
+                <p>Bank Account</p>
+                <input type="text" id="name" placeholder="Bank Account Amount" />
+                <button type="submit">Save Budget Template</button>
+            </form>
+        </main>
