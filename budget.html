@@ -9,6 +9,14 @@
                 margin-top: 0; 
                 margin-bottom: 15px; /* Add margin between header and main content */
             }
+            
+            div {
+                display: flex; /* or display: inline-flex; */
+                align-items: center; /* Align items vertically */
+            }
+            p, input {
+            margin-right: 10px; /* Adjust the margin as needed */
+        }
         </style>
     </head>
 
@@ -27,36 +35,63 @@
         </header>
         <hr>
 
+
         <main> 
             <h1>Budget Categories</h1>
             <form method="get" action="budget.html">
                 <p>Income</p>
+                <div>
                 <p>Scholarship</p>
-                <input type="text" id="name" placeholder="Scholarship Amount" />
+                <input type="text" id="name" placeholder="Budgeted Scholarship Amount" />
+                <input type="text" id="name" placeholder="Actual Scholarship Amount" />
+                <input type="text" id="name" placeholder="Difference" />
+                </div>
+                <div>
                 <p>Financial Aid</p>
-                <input type="text" id="name" placeholder="Financial Aid Amount" />
+                <input type="text" id="name" placeholder="Budgeted Financial Aid Amount" />
+                <input type="text" id="name" placeholder="Actual Scholarship Amount" />
+                <input type="text" id="name" placeholder="Difference" />
+                </div>
+                <div>
                 <p>Income from Job</p>
                 <input type="text" id="name" placeholder="Income Amount" />
+                </div>
 
                 <p>Expenses</p>
+                <div>
                 <p>Rent/Housing</p>
                 <input type="text" id="name" placeholder="Rent/Housing Amount" />
+                </div>
+                <div>
                 <p>Gas</p>
                 <input type="text" id="name" placeholder="Gas Amount" />
+                </div>
+                <div>
                 <p>Tuition</p>
                 <input type="text" id="name" placeholder="Tuition Amount" />
+                </div>
+                <div>
                 <p>Insurance</p>
                 <input type="text" id="name" placeholder="Insurance Amount" />
+                </div>
+                <div>
                 <p>Books</p>
                 <input type="text" id="name" placeholder="Books Amount" />
+                </div>
+                <div>
                 <p>Activities</p>
                 <input type="text" id="name" placeholder="Activites Amount" />
+                </div>
+                <div>
                 <p>Groceries</p>
                 <input type="text" id="name" placeholder="Groceries Amount" />
+                </div>
 
                 <p>Savings</p>
+                <div>
                 <p>Bank Account</p>
                 <input type="text" id="name" placeholder="Bank Account Amount" />
+                </div>
                 <button type="submit">Save Budget Template</button>
             </form>
         </main>
