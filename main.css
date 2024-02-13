@@ -1,4 +1,4 @@
-body {
+  body {
     display: flex;
     flex-direction: column;
     min-width: 375px;
@@ -12,6 +12,7 @@ body {
     flex: 0 80px;
     background-color:slategrey;
   }
+
 
   header h1 {
     flex: 1;
@@ -35,13 +36,14 @@ body {
     flex: 1;
   }
   nav menu li a { /*targets the anchor elements from html*/
-    color: white;
+    color: antiquewhite;
     text-decoration: none;         /*removes the hyperlink line*/
     transition: color 0.5s;
   }
   nav menu li a:hover {
     color: lightblue;
   }
+
 
   main  {           /*welcome and login section*/
     flex: 1 calc(100vh - 110px);
@@ -50,29 +52,33 @@ body {
     align-items: center;
     justify-content: space-around;
     background-color: lightblue;
+    padding: 20px;
   }
 
   main h1 {
     color: slategray;
     font-size:50px;
+    margin-bottom: 10px;
   }
 
   main p {
     color: slategray;
     font-size: larger;
+    margin-bottom: 10px;
   }
   
   main form {
     color: slategray;
     font-size: larger;
+    margin-top: 10px;
   }
 
   footer {
     flex: 0 30px;
+    justify-content: center;
+    align-items: center;
     background-color: slategrey;
   }
-  
-  
   
   .navbar-brand {
     padding-left: 0.3em;
@@ -80,9 +86,12 @@ body {
   }
   
   
-  footer a {
-    float: right;
+
+  footer a, footer span {
+    align-items: center;
+    color: antiquewhite;
   }
+
   
   @media (max-height: 600px) {
     header {
