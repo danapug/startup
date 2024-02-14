@@ -72,6 +72,7 @@
     color: slategray;
     font-size: larger;
     margin-top: 5px;
+    text-align: center;
   }
 
   footer {
@@ -108,7 +109,6 @@
     cursor: pointer;
     transition: background-color 0.3s ease; /* Smooth hover effect */
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    align-items: center;
   }
 
   main form button[type="submit"]:hover {

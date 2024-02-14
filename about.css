@@ -55,11 +55,22 @@
     font-size: larger;
   }
   
+  main p {
+    text-align: center;
+  }
+  
   main div {
     font-weight: bold;
     text-align: center;
     font-size:x-large;
+    margin: 0;
   }
+
+  .id {
+    border: 2px solid #000; /* Border style */
+    padding: 10px; /* Padding around the text */
+    margin-bottom: 20px; /* Optional: Add margin to separate it from other elements */
+}
 
    
   

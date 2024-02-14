@@ -44,10 +44,6 @@ body {
     color: lightblue;
   }
 
-  .navbar-brand {
-    padding-left: 0.3em;
-    border-bottom: solid rgb(182, 182, 182) thin;
-  }
 
   table {
     width: 100%;

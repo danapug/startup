@@ -53,7 +53,9 @@ body {
 
   main {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column; /* Ensure vertical alignment */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
     background-color: lightblue;
 }
 
@@ -72,9 +74,11 @@ body {
     flex: 1 100%; /* Make paragraph take full width */
 }
 
-.category >div > p:last-child::before {
+form p {
     font-weight: bolder;
     text-decoration-line: underline;
+    text-align: center;
+    font-size: 20px;
 }
 
 .category input[type="text"] {
@@ -102,7 +106,7 @@ main form button[type="submit"] {
     cursor: pointer;
     transition: background-color 0.3s ease; /* Smooth hover effect */
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    align-self: center;
+    align-items: center;
   }
 
   main form button[type="submit"]:hover {
