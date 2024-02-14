@@ -43,18 +43,21 @@ body {
     color: lightblue;
   }
 
-  .custom-table {
+  table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.custom-table th,
-.custom-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
+table thead {
+    background-color: lightblue; /* Background color for header */
 }
 
-.custom-table th {
-    background-color: #f2f2f2;
+table tbody {
+    border: 1px solid #ddd;
+    background-color: antiquewhite;
+}
+
+table td {
+    padding: 8px;
+    text-align: left;
 }
