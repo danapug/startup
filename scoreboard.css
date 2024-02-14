@@ -2,6 +2,7 @@ body {
     display: flex;
     flex-direction: column;
     min-width: 375px;
+    background-color: lightgray;
   }
   header {
     display: flex;
@@ -34,7 +35,7 @@ body {
     flex: 1;
   }
 
-  nav menu li a { /*targets the anchor elements from html*/
+  nav menu li a { 
     color: antiquewhite;
     text-decoration: none;         /*removes the hyperlink line*/
     transition: color 0.5s;
@@ -46,18 +47,26 @@ body {
   table {
     width: 100%;
     border-collapse: collapse;
-}
+  }
 
-table thead {
-    background-color: lightblue; /* Background color for header */
-}
+  table thead {
+    background-color: lightblue; 
+  }
 
-table tbody {
+  table tbody {
     border: 1px solid #ddd;
     background-color: antiquewhite;
+  }
+
+  table td {
+    padding: 8px;
+    text-align: center;
+  }
+
+  table th, table td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid black; /* Add black border to all cells */
 }
 
-table td {
-    padding: 8px;
-    text-align: left;
-}
+ 
