@@ -68,3 +68,19 @@ Does budgeting and finances feel daunting? The Budget Tracker is perfect for col
 
 • **WebSocket -** As the budget is used, a savings percentage based on how the user stayed within their budget will be broadcast on the scoreboard.
 
+
+### CSS Deliverable
+# <span style="border-bottom: 2px solid black;"></span>
+• **Prerequisites -** Simon CSS deployed to my production environment. Link to my GitHub repository on the home page. Updated my README file.
+
+• **Header, footer, and main content body -** Used the proper CSS styling breakdowns and used flex.
+
+• **Navigation elements -** The tabs, links, and buttons change to a lighter color when you hover over it with your mouse. I removed hyperlink underlines.
+
+• **Responsive to window resizing -** The app looks good on a desktop, ipad, and laptop. When you shrink and expand the webpage, the website properly adjusts.
+
+• **Application elements -** Bootstrap was used; login and submit buttons. Used good margins, padding, colors, and whitespace.
+
+• **Application text content -** Text is displayed with consistent font and similar color schemes and layouts throughout the different tabs.
+
+• **Application images -** I added a border and curved edges around my photo on the about page.
