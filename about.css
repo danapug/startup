@@ -71,11 +71,14 @@
   }
 
   #picture {
+    width: 325px;
+    height: 325px;
     display: flex;
-    justify-content: center; /* Center the image horizontally */
-    align-items: center; /* Center the image vertically */
-    
-}
+    justify-content: center; 
+    align-items: center; 
+    border: 2px solid slategray; 
+    border-radius: 2%;
+  }
   
   footer {
     font-weight: bold;
