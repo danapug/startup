@@ -291,9 +291,55 @@ o	Forming a structure similar to this:
 •	'' === false;
 // OUTPUT: false
 
+• Local Storage: ability to persistently store and retrieve data(scores, usernames) on a user's browser across user sessions and html page renderings. For example, your frontend js code could store a user's name on one html page and then retrieve the name later when a different html page is loaded. The user's name will also be availale in local storage the next time the same browser is used to access the same website.
 
+•Four functions with localStorage:
+  -setItem(name, value) sets a named item's value into local storage
+  -getItem(name) gets a named item's value from local storage
+  -removeItem(name) removes a named item from local storage
+  -clear() clears all items in local storage
 
+• To store a JS object or array, then you must first convert it to a JSON string with JSON.stringify() on insertion and parse it back to JSON.parse() when retrieved.
 
+• JavaScript object represents a collection of name value pairs referred to as properties. The property name must be of type String or Symbol, but the value can be of any type. 
 
+• Key value pairs are delimited with commas. Curly braces delimit an object, square brackets and commas delimit arrays, and strings are always delimited with double quotes.
 
+•UTF-8 allows for representation of global data, this allows you to write any language character.
 
+const obj = { a: 2, b: 'crockford', c: undefined };
+
+const json = JSON.stringify(obj);
+
+const objFromJson = JSON.parse(json);
+
+console.log(obj, json, objFromJson);
+
+// OUTPUT:
+// {a: 2, b: 'crockford', c: undefined}
+
+// {"a":2, "b":"crockford"}
+
+// {a: 2, b: 'crockford'}
+
+• There are no type declarations in js as the type is always inferred by the assignmenet of the value to the parameter. When a function is called, the caller may choose what parameters to provide. If a parameter is not provided then the value of the parameter is undefined when the function executes.
+
+const s = 'Example:조선글';
+
+console.log(s.length);
+// OUTPUT: 11
+
+console.log(s.indexOf('조선글'));
+// OUTPUT: 8
+
+console.log(s.split(':'));
+// OUTPUT: ['Example', '조선글']
+
+console.log(s.startsWith('Ex'));
+// OUTPUT: true
+
+console.log(s.endsWith('조선글'));
+// OUTPUT: true
+
+console.log(s.toLowerCase());
+// OUTPUT: example:조선글
