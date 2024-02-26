@@ -36,7 +36,41 @@ output: ['a1', 'a2', 'a3',]
 
 • querySelector selects the first element that matches the CSS selector. querySelectorAll selects all elements that match the specified CSS selector.
 
-• DOM(document object model) is a programming interface(API... application programming interface) that represents the structure and content of a web page as a tree of objects. It allows web browsers and scripts to access and modify html elements and css attributes. It allows JS to interacts and modify the content and structure of the web page.
+• DOM(document object model) object representation of the html elements that the browser uses to render the display. For everything in an html document there is a node in the DOM(this includes elements, attributes, text, comments, whitespace). All of these nodes form a big tree with the document node at the top. DOM is a programming interface(API... application programming interface) that represents the structure and content of a web page as a tree of objects. It allows web browsers and scripts to access and modify html elements and css attributes. It allows JS to interacts and modify the content and structure of the web page.
+
+•DOM can insert, modify, or delete elements. You can insert a new element with 'createElement' and then querySelector, and appendChild the new element that you created.
+
+function insertChild(parentSelector, text) {
+  const newChild = document.createElement('div');
+  newChild.textContent = text;
+
+  const parentElement = document.querySelector(parentSelector);
+  parentElement.appendChild(newChild);
+}
+
+insertChild('#courses', 'new course');
+
+To delte elements call the removeChild function on the parent element:
+function deleteElement(elementSelector) {
+  const el = document.querySelector(elementSelector);
+  el.parentElement.removeChild(el);
+}
+
+deleteElement('#courses div');
+
+
+
+• textContent: property contains all of the element's text.
+
+• innerHTML: access a textual representation of an element's html content.
+
+•addEventListener: ability to attach a function that gets called when an event occurs on the element.
+
+• JS promise objects are great for asynchronous execution.
+
+•Async/await: 'await' wraps the execution of a promise and removed the need to chain functions. 'await' expression will block until the promise state moves to 'fulfilled' or throws an execption if the state moves to rejected. 'await' must be called at the top level of the JS or it must be in a function that is defined with the async keyword. 'async' blocks execution until the promise has resolved and then returns the result of the promise.
+
+• By combining 'async' to define functions that return promises with 'await' to wait on the promise, you can create code that is asynchronous, but still maintains the flow of the code without explicitly using callbacks.
 
 • Valid JS functions would include:
 
@@ -96,6 +130,14 @@ Do: div.header{color:blue};
             console.log('fries');
 Output: burger fries taco shake noodles
 
+So if there was a resolve false(then you would output the exception salad, but since it is true, we do not output the exception. If there was a wait then it would have been burger, taco, shake, noodles, fries.
+
+•Promise allows the main rendering thread to continue while some action is executed in the background. Create a promise by calling the promise object constructor and passing it an executor function that runs the asynchronous operation. Executing asynchronously means that promise constructor may return before the promise executor function runs. 
+
+•The state of the promise is in one of three states: pending(currently running asynchronously), fulfilled(completed successfully), or rejected(Failed to complete). Asynchronous execution is demonstrated by using the setTimeout function(number of milliseconds to wait and a function to call after that amount of time has expired).
+
+• The promise object has 3 functions: then, catch, and finally. 'then' function is called if the promise is fulfilled, 'catch' is called if the promise is rejected, and 'finally' is always called after all the processing is completed. 
+
 • What does this await function output?
 
       const a = async function() {
@@ -118,6 +160,8 @@ Output: A D B
 •	Hypertext Markup Language
 
 •	HTML is the structure/backbone of your website
+
+• HTML executes on a single thread. 
 
 •	HTML elements are represented with enclosing tags that may enclose other elements or text. 
 
