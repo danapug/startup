@@ -19,11 +19,8 @@ categoryElements.forEach(calculateDifference);
 
 
 function calculateTotals() {
-    // Get references to income and expense input fields
     const incomeInputs = document.querySelectorAll("[id*='income']");
     const expenseInputs = document.querySelectorAll("[id*='expense']");
-  
-    // Initialize variables
     let totalIncome = 0;
     let totalExpenses = 0;
   
@@ -42,68 +39,92 @@ function calculateTotals() {
       expenses: totalExpenses,
       savings: savings
     };
-  }
+}
 
-   const submitButton = document.querySelector("button[type='submit']");
-    submitButton.addEventListener("click", function (event) {
-        event.preventDefault();                 // Prevent default form submission
-        categoryElements.forEach(calculateDifference);         // Recalculate differences on submit
-
-        const totals = calculateTotals();       //totals of income, expenses, and savings
-
-        const budgetData = {              //budget info is saved to localStorage
-            income: totals.income,
-            expenses: totals.expenses,
-            savings: totals.savings
-        };
-        localStorage.setItem("budgetData", JSON.stringify(budgetData));
-        const scoreEl = document.querySelector('#score');
-        const score = calculateScore();
-        scoreEl.textContent = `Score: ${score.toFixed(2)}%`;
-    });
-
-    function getPlayerName() {
-        // Check if the username is stored in localStorage
-        const storedUsername = localStorage.getItem("username");
-      
-        // If username exists, return it
-        if (storedUsername) {
-          return storedUsername;
-        } else {
-          // If username is not found, handle it appropriately (e.g., prompt for input)
-          console.warn("Username not found in localStorage. Consider alternative methods (e.g., prompting user for login).");
-          return ""; // You can return an empty string or a default value here
-        }
-    }
-
+const submitButton = document.querySelector("button[type='submit']");
+submitButton.addEventListener("click", function (event) {
+    event.preventDefault();                 // Prevent default form submission
+    categoryElements.forEach(calculateDifference);         // Recalculate differences on submit
+    const totals = calculateTotals();       //totals of income, expenses, and savings
+    const budgetData = {              //budget info is saved to localStorage
+        income: totals.income,
+        expenses: totals.expenses,
+        savings: totals.savings
+    };
+    localStorage.setItem("budgetData", JSON.stringify(budgetData));
+    const scoreEl = document.querySelector('#score');
+    const score = calculateScore();
+    scoreEl.textContent = `Score: ${score.toFixed(2)}%`;
     const playerName = getPlayerName();
+    updateScoreboard(playerName, score); 
+    const savings = totalIncome - totalExpenses; 
+    const savingsMessageEl = document.querySelector('#savings-message'); 
+    savingsMessageEl.textContent = `You saved ${savings.toFixed(2)} this month.`;
+});
 
-// Use the player name to connect with their budget data (example)
+function getPlayerName() {
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+        return storedUsername;
+    } 
+    else {
+          // If username is not found
+        console.warn("Username not found in localStorage.");
+        return ""; 
+    }
+}
+
+const playerName = getPlayerName();
 const budgetData = getBudgetForPlayer(playerName);
 
-    function calculateScore() {
-        
-        const budgetData = JSON.parse(localStorage.getItem("budgetData"));
-        const income = budgetData.income;
-        const expenses = budgetData.expenses;
-        const savings = income - expenses;
-        const score = (savings / income) * 100;          //scoreboard formula
-        return score;
-    }
+function calculateScore() {
+    const budgetData = JSON.parse(localStorage.getItem("budgetData"));
+    const income = budgetData.income;
+    const expenses = budgetData.expenses;
+    const savings = income - expenses;
+    const score = (savings / income) * 100;          //scoreboard formula
+    return score;
+}
 
-    function getBudgetForPlayer(playerName) {
-        const allBudgetData = JSON.parse(localStorage.getItem("budgetData") || "{}"); // Handle potential missing data
-        const playerBudget = allBudgetData[playerName]; // Assuming budget data is stored per player name as keys
+function getBudgetForPlayer(playerName) {
+    const allBudgetData = JSON.parse(localStorage.getItem("budgetData") || "{}"); // Handle potential missing data
+    const playerBudget = allBudgetData[playerName]; 
       
-        if (playerBudget) {
-          return playerBudget;
-        } else {
-          // Handle the case where the player's budget data is not found
-          console.warn(`Budget data not found for player: ${playerName}`);
-          return null; // Or return an empty object or default value
-        }
+    if (playerBudget) {
+        return playerBudget;
+    } 
+    else {
+        // Handle the case where the player's budget data is not found
+        console.warn(`Budget data not found for player: ${playerName}`);
+        return null; // Or return an empty object or default value
     }
+}
 
-    
-//function for updating the scoreboard
-//function for resetting the budget
+function updateScoreboard(username, score) {
+    let scores = JSON.parse(localStorage.getItem('scores') || "[]");      //retrieve scores from localStorage
+    const foundIndex = scores.findIndex(entry => entry.name === username);     // Update the score for the given username OR add a new entry
+    if (foundIndex !== -1) {
+      scores[foundIndex].score = score;
+      scores[foundIndex].date = new Date().toLocaleDateString(); 
+    } 
+    else {
+      scores.push({ name: username, score: score, date: new Date().toLocaleDateString() });
+    }
+    scores.sort((a, b) => b.score - a.score);             // Sort scores in descending order
+    scores = scores.slice(0, 10);                        // Limit top 10 scores
+    localStorage.setItem('scores', JSON.stringify(scores));     // Update localStorage with the new scores
+}
+
+function resetBudget() {
+    localStorage.removeItem('budgetData'); 
+    const inputElements = document.querySelectorAll("[id*='budgeted'], [id*='actual'], [id*='difference']");
+    inputElements.forEach(element => element.value = ""); 
+    const savingsMessageEl = document.querySelector('#savings-message');
+    savingsMessageEl.textContent = ""; // Or set a default message 
+}
+
+const resetButton = document.querySelector("button[id='reset-budget']"); 
+resetButton.addEventListener("click", function (event) {
+  event.preventDefault(); 
+  resetBudget();
+});
