@@ -1,4 +1,4 @@
-// Get references to category elements
+/*// Get references to category elements
 const categoryElements = document.querySelectorAll(".category");
 
 // Function to calculate the difference for a single category
@@ -19,8 +19,8 @@ categoryElements.forEach(calculateDifference);
 
 
 function calculateTotals() {
-    const incomeInputs = document.querySelectorAll("[id*='income']");
-    const expenseInputs = document.querySelectorAll("[id*='expense']");
+    const incomeInputs = document.querySelectorAll("#actual-scholarship, #actual-financial, #actual-income");
+    const expenseInputs = document.querySelectorAll("#actual-rent, #actual-car, #actual-tuition, #actual-loans, #actual-insurance, #actual-clothing, #actual-books, #actual-activities, #actual-groceries, #actual-hair, #actual-tithing, #actual-date, #actual-misce");
     let totalIncome = 0;
     let totalExpenses = 0;
   
@@ -45,21 +45,27 @@ const submitButton = document.querySelector("button[type='submit']");
 submitButton.addEventListener("click", function (event) {
     event.preventDefault();                 // Prevent default form submission
     categoryElements.forEach(calculateDifference);         // Recalculate differences on submit
-    const totals = calculateTotals();       //totals of income, expenses, and savings
-    const budgetData = {              //budget info is saved to localStorage
+    try {
+        const totals = calculateTotals();       //totals of income, expenses, and savings
+        const budgetData = {              //budget info is saved to localStorage
         income: totals.income,
         expenses: totals.expenses,
         savings: totals.savings
     };
     localStorage.setItem("budgetData", JSON.stringify(budgetData));
     const scoreEl = document.querySelector('#score');
-    const score = calculateScore();
-    scoreEl.textContent = `Score: ${score.toFixed(2)}%`;
-    const playerName = getPlayerName();
-    updateScoreboard(playerName, score); 
-    const savings = totalIncome - totalExpenses; 
-    const savingsMessageEl = document.querySelector('#savings-message'); 
-    savingsMessageEl.textContent = `You saved ${savings.toFixed(2)} this month.`;
+    if (scoreEl) {
+        const score = calculateScore();
+        scoreEl.textContent = `Score: ${score.toFixed(2)}%`;
+    }
+    const savingsMessageEl = document.querySelector('#savings-message');
+    if (savingsMessageEl) {
+      const savings = totals.income - totals.expenses;
+      savingsMessageEl.textContent = `You saved ${savings.toFixed(2)} this month.`;
+    }
+  } catch (error) {
+    console.error("An error occurred:", error);
+  }
 });
 
 function getPlayerName() {
@@ -113,18 +119,5 @@ function updateScoreboard(username, score) {
     scores.sort((a, b) => b.score - a.score);             // Sort scores in descending order
     scores = scores.slice(0, 10);                        // Limit top 10 scores
     localStorage.setItem('scores', JSON.stringify(scores));     // Update localStorage with the new scores
-}
+}*/
 
-function resetBudget() {
-    localStorage.removeItem('budgetData'); 
-    const inputElements = document.querySelectorAll("[id*='budgeted'], [id*='actual'], [id*='difference']");
-    inputElements.forEach(element => element.value = ""); 
-    const savingsMessageEl = document.querySelector('#savings-message');
-    savingsMessageEl.textContent = ""; // Or set a default message 
-}
-
-const resetButton = document.querySelector("button[id='reset-budget']"); 
-resetButton.addEventListener("click", function (event) {
-  event.preventDefault(); 
-  resetBudget();
-});
