@@ -1,5 +1,4 @@
 function login() {
-    debugger;
     const usernameEl = document.querySelector("#name");
     const passwordEl = document.querySelector("#pass");
     const userExists = localStorage.getItem(JSON.stringify(usernameEl.value));
