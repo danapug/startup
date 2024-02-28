@@ -30,8 +30,17 @@ submitButton.addEventListener("click", function (event) {
     try {
         const totals = calculateTotals();       //totals of income, expenses, and savings
         const savingsMessage = document.querySelector('#savings-message');
-        if (savingsMessage) {
-            savingsMessage.textContent = `You saved: ${totals.savings.toFixed(2)}%`;
+        if (totals.savings > 0) {
+            savingsMessage.textContent = `You saved: $ ${totals.savings.toFixed(2)}. Way to go, keep saving!!\n
+            You earned: $ ${totals.income.toFixed(2)}\n
+            You spent: $ ${totals.expenses.toFixed(2)}`;
+        }
+        else {
+            const savingsMessageElement = document.querySelector('#savings-message');
+            savingsMessageElement.style.color = 'red';
+            savingsMessage.textContent = `You spent: $ ${-totals.savings.toFixed(2)} more than you made. Start saving!!\n
+            You earned: $ ${totals.income.toFixed(2)}\n
+            You spent: $ ${totals.expenses.toFixed(2)}`;
         }
         const budgetData = {              //budget info is saved to localStorage
             income: totals.income,
