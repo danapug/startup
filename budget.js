@@ -24,6 +24,14 @@ function calculateTotals() {
     };
 }
 
+function saveBudgetedInputs() {
+    const budgetedInputs = document.querySelectorAll("[id^='budgeted-']");
+    for (const input of budgetedInputs) {
+      const userId = sessionStorage.getItem("userId"); // Assuming user ID from login or session
+      localStorage.setItem(`${userId}-${input.id}`, input.value);
+    }
+}
+
 const submitButton = document.querySelector("button[type='submit']");
 submitButton.addEventListener("click", function (event) {
 
@@ -54,6 +62,7 @@ submitButton.addEventListener("click", function (event) {
 
 function retrieveBudgetData() {
   // Retrieve only budgeted values
+  
     const budgetedScholarship = localStorage.getItem("budgeted-scholarship");
     const budgetedFinancial = localStorage.getItem("budgeted-financial");
     const budgetedIncome = localStorage.getItem("budgeted-income");
@@ -96,33 +105,3 @@ function retrieveBudgetData() {
 
 // Call retrieveBudgetData on page load or login
 retrieveBudgetData();
-
-/*const submitButton = document.querySelector("button[type='submit']");
-submitButton.addEventListener("click", function (event) {
-    event.preventDefault();                 // Prevent default form submission
-    try {
-        const totals = calculateTotals();       //totals of income, expenses, and savings
-        const savingsMessage = document.querySelector('#savings-message');
-        if (totals.savings > 0) {
-            savingsMessage.textContent = `You saved: $ ${totals.savings.toFixed(2)}. Way to go, keep saving!!\n
-            You earned: $ ${totals.income.toFixed(2)}\n
-            You spent: $ ${totals.expenses.toFixed(2)}`;
-        }
-        else {
-            const savingsMessageElement = document.querySelector('#savings-message');
-            savingsMessageElement.style.color = 'red';
-            savingsMessage.textContent = `You spent: $ ${-totals.savings.toFixed(2)} more than you made. Start saving!!\n
-            You earned: $ ${totals.income.toFixed(2)}\n
-            You spent: $ ${totals.expenses.toFixed(2)}`;
-        }
-        const budgetData = {              //budget info is saved to localStorage
-            income: totals.income,
-            expenses: totals.expenses,
-            savings: totals.savings
-        };
-        localStorage.setItem("budgetData", JSON.stringify(budgetData));
-    } 
-    catch (error) {
-        console.error("An error occurred:", error);
-    }
-});*/
