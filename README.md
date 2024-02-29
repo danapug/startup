@@ -84,3 +84,15 @@ Does budgeting and finances feel daunting? The Budget Tracker is perfect for col
 • **Application text content -** Text is displayed with consistent font and similar color schemes and layouts throughout the different tabs.
 
 • **Application images -** I added a border and curved edges around my photo on the about page.
+
+### JavaScript Deliverable
+# <span style="border-bottom: 2px solid black;"></span>
+• **Prerequisites -** Simon JS deployed to my production environment. Link to my GitHub repository on the home page. Updated my README file.
+
+• **Login -** When you enter your username and password it stores them in a key pair in the local storage and takes you to the budget page.
+
+• **Database -** The user input data from the budgeted categories will be saved (the actual data values will not be because generally these values will vary month to month) in the local storage. This shows support for future database data.
+
+• **WebSocket -** For now I have functions written using the local storage, to then insert the users into the scoreboard, but in the future this will be replaced with a websocket.
+
+• **Application logic -** The app sends a message to the screen once the person has submitted their budget template. Outputs how much they saved compared to how much they spent.
