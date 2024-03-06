@@ -14,6 +14,8 @@ app.use(express.static('public'));
 const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
+let scores = [];
+
 // GetScores
 apiRouter.get('/scores', (_req, res) => {
   res.send(scores);
