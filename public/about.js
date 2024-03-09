@@ -28,8 +28,8 @@
   displayPicture();*/
 
 
-  /*function displayQuote(data) {
-    fetch('https://api.quotable.io/tag=Budget[money]')
+  function displayQuote(data) {
+    fetch(`https://api.quotable.io/search/quotes?query=money+budget`)
       .then((response) => response.json())
       .then((data) => {
         const containerEl = document.querySelector('#quote');
@@ -46,7 +46,7 @@
         containerEl.appendChild(authorEl);
       });
   }
-displayQuote()*/
+displayQuote()
 
 
   fetch(`https://emojihub.yurace.pro/api/random`)
