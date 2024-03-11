@@ -49,7 +49,7 @@ submitButton.addEventListener("click", function (event) {
                 You earned: $ ${totals.income.toFixed(2)}\n
                 You spent: $ ${totals.expenses.toFixed(2)}`;
         } else {
-        savingsMessageElement.style.color = 'red';
+        savingsMessage.style.color = 'red';
         savingsMessage.textContent = `You spent: $ ${-totals.savings.toFixed(2)} more than you made. Start saving!!\n
                 You earned: $ ${totals.income.toFixed(2)}\n
                 You spent: $ ${totals.expenses.toFixed(2)}`;
