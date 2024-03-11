@@ -50,13 +50,22 @@ function calculateScore() {
 }
 
 
-function saveScore(username) {
-  const score = calculateScore(); 
-  console.log(score);
-  const scores = JSON.parse(localStorage.getItem('scores')) || [];
-  const newScore = { name, score: score.toFixed(2), date: new Date().toLocaleDateString() };
-  scores.push(newScore);
-  localStorage.setItem('scores', JSON.stringify(scores));
+async function saveScore(username) {
+  const score = calculateScore();
+  const newScore = { name: username, score: score.toFixed(2), date: new Date().toLocaleDateString() };
+
+  try {
+    const response = await fetch('/api/score', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newScore)
+    });
+
+    const data = await response.json();
+    console.log("Score submitted successfully:", data);
+  } catch (error) {
+    console.error("Error submitting score:", error);
+  }
 }
 
 window.addEventListener("DOMContentLoaded", function () {
@@ -65,6 +74,7 @@ window.addEventListener("DOMContentLoaded", function () {
   calculateAndDisplayScore();
 
   window.addEventListener("budgetSubmitted", function (event) {
+    const username = sessionStorage.getItem("username");
     saveScore(username);
     // Reload scores after saving
     loadScores();
