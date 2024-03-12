@@ -96,3 +96,16 @@ Does budgeting and finances feel daunting? The Budget Tracker is perfect for col
 • **WebSocket -** For now I have functions written using the local storage, to then insert the users into the scoreboard, but in the future this will be replaced with a websocket.
 
 • **Application logic -** The app sends a message to the screen once the person has submitted their budget template. Outputs how much they saved compared to how much they spent.
+
+### Service Deliverable
+# <span style="border-bottom: 2px solid black;"></span>
+•	**Node.js/Express HTTP service -** done!
+
+•	**Static middleware for frontend -** done!
+
+•	**Calls to third party endpoints –** Random photo API generator
+
+•	**Backend service endpoints -** Placeholders for login that stores the current username on the server and will output a savings score for them using endpoints in my index.js file. 
+
+•	**Frontend calls service endpoints -** I did this using the fetch function in my budget.js file which then connects to the backend service endpoint of outputting the username and percentage score on the scoreboard tab.
+
