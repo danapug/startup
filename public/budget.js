@@ -36,41 +36,44 @@ const submitButton = document.querySelector("button[type='submit']");
 submitButton.addEventListener("click", async function (event) {
 
     try {
-        // Save only budgeted inputs (all their IDs start with "budgeted-")
-        const budgetedInputs = document.querySelectorAll("[id^='budgeted-']")
-        //for (const input of budgetedInputs) {
-          const userID = localStorage.getItem("username");
-          await fetch("/api/score", {
-            method : "POST",
-            headers : {
-              "Content-Type" : "application/json"
-            },
-            body : JSON.stringify({
-              username : userID,
-              score : 5
-            })
-          });
-        //}
-        const budgetSubmittedEvent = new Event('budgetSubmitted');
-        window.dispatchEvent(budgetSubmittedEvent);
-        const totals = calculateTotals();
+      const budgetSubmittedEvent = new Event('budgetSubmitted');
+    window.dispatchEvent(budgetSubmittedEvent);
+    const totals = calculateTotals();
         // Display savings message using totals
-        const savingsMessage = document.querySelector('#savings-message');
-        if (totals.savings > 0) {
-            savingsMessage.textContent = `You saved: $ ${totals.savings.toFixed(2)}. Way to go, keep saving!!\n
-                You earned: $ ${totals.income.toFixed(2)}\n
-                You spent: $ ${totals.expenses.toFixed(2)}`;
-        } else {
-        savingsMessage.style.color = 'red';
-        savingsMessage.textContent = `You spent: $ ${-totals.savings.toFixed(2)} more than you made. Start saving!!\n
-                You earned: $ ${totals.income.toFixed(2)}\n
-                You spent: $ ${totals.expenses.toFixed(2)}`;
-        }
-        console.log("form data processed");
+        const budgetedInputs = document.querySelectorAll("[id^='budgeted-']")
+        const userID = localStorage.getItem("username");
+        
+        await fetch("/api/score", {
+          method : "POST",
+          headers : {
+            "Content-Type" : "application/json"
+          },
+          body : JSON.stringify({
+            username : userID,
+            //score : totals.savings.toFixed(2)
+            score : 50
+          })
+        });
+        
+    const savingsMessage = document.querySelector('#savings-message');
+    if (totals.savings > 0) {
+      savingsMessage.textContent = `You saved: $ ${totals.savings.toFixed(2)}. Way to go, keep saving!!\n
+      You earned: $ ${totals.income.toFixed(2)}\n
+      You spent: $ ${totals.expenses.toFixed(2)}`;
+    } 
+    else {
+      savingsMessage.style.color = 'red';
+      savingsMessage.textContent = `You spent: $ ${-totals.savings.toFixed(2)} more than you made. Start saving!!\n
+      You earned: $ ${totals.income.toFixed(2)}\n
+      You spent: $ ${totals.expenses.toFixed(2)}`;
+    }
+        
     } catch (error) {
         console.error("An error occurred:", error);
     }
-    });
+    
+    
+});
 
 function retrieveBudgetData() {
   // Retrieve only budgeted values

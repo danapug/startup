@@ -6,21 +6,15 @@ async function loadScores() {
   console.log(scores);
   if (Object.entries(scores).length) {
     for (const [username, score] of Object.entries(scores)) {
-      //const positionTdEl = document.createElement('td');
       const nameTdEl = document.createElement('td');
       const scoreTdEl = document.createElement('td');
-      //const dateTdEl = document.createElement('td');
-
-      //positionTdEl.textContent = username + 1;
+      
       nameTdEl.textContent = username;
       scoreTdEl.textContent = score;
-      //dateTdEl.textContent = score.date;
 
       const rowEl = document.createElement('tr');
-      //rowEl.appendChild(positionTdEl);
       rowEl.appendChild(nameTdEl);
       rowEl.appendChild(scoreTdEl);
-      //rowEl.appendChild(dateTdEl);
       tableBodyEl.appendChild(rowEl);
     }
   } else {
