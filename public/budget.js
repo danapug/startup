@@ -33,14 +33,26 @@ function saveBudgetedInputs() {
 }
 
 const submitButton = document.querySelector("button[type='submit']");
-submitButton.addEventListener("click", function (event) {
+submitButton.addEventListener("click", async function (event) {
 
     try {
         // Save only budgeted inputs (all their IDs start with "budgeted-")
         const budgetedInputs = document.querySelectorAll("[id^='budgeted-']")
-        for (const input of budgetedInputs) {
-            localStorage.setItem(input.id, input.value);
-        }
+        //for (const input of budgetedInputs) {
+          const userID = localStorage.getItem("username");
+          await fetch("/api/score", {
+            method : "POST",
+            headers : {
+              "Content-Type" : "application/json"
+            },
+            body : JSON.stringify({
+              username : userID,
+              score : 5
+            })
+          });
+        //}
+        const budgetSubmittedEvent = new Event('budgetSubmitted');
+        window.dispatchEvent(budgetSubmittedEvent);
         const totals = calculateTotals();
         // Display savings message using totals
         const savingsMessage = document.querySelector('#savings-message');

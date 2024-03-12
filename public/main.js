@@ -7,8 +7,9 @@ function login() {
             username: usernameEl.value,
             password: passwordEl.value
         };
+        localStorage.setItem("username", usernameEl.value);
         const userString = JSON.stringify(user);
-        localStorage.setItem(JSON.stringify (usernameEl.value), userString);
+        localStorage.setItem("user", userString);
         window.location.href = "budget.html";
     }
     else {

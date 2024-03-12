@@ -1,25 +1,26 @@
-function loadScores() {
-
-  const scores = JSON.parse(localStorage.getItem('scores')) || [];
+async function loadScores() {
+//fetch to call /scores
+  const response = await fetch ("/api/scores");
+  const scores = await response.json();
   const tableBodyEl = document.querySelector('#scores');
   console.log(scores);
-  if (scores.length) {
-    for (const [i, score] of scores.entries()) {
-      const positionTdEl = document.createElement('td');
+  if (Object.entries(scores).length) {
+    for (const [username, score] of Object.entries(scores)) {
+      //const positionTdEl = document.createElement('td');
       const nameTdEl = document.createElement('td');
       const scoreTdEl = document.createElement('td');
-      const dateTdEl = document.createElement('td');
+      //const dateTdEl = document.createElement('td');
 
-      positionTdEl.textContent = i + 1;
-      nameTdEl.textContent = score.name;
-      scoreTdEl.textContent = score.score;
-      dateTdEl.textContent = score.date;
+      //positionTdEl.textContent = username + 1;
+      nameTdEl.textContent = username;
+      scoreTdEl.textContent = score;
+      //dateTdEl.textContent = score.date;
 
       const rowEl = document.createElement('tr');
-      rowEl.appendChild(positionTdEl);
+      //rowEl.appendChild(positionTdEl);
       rowEl.appendChild(nameTdEl);
       rowEl.appendChild(scoreTdEl);
-      rowEl.appendChild(dateTdEl);
+      //rowEl.appendChild(dateTdEl);
       tableBodyEl.appendChild(rowEl);
     }
   } else {
@@ -51,23 +52,18 @@ return score;
 
 
 function saveScore(username) {
-const score = calculateScore(); 
-console.log(score);
-const scores = JSON.parse(localStorage.getItem('scores')) || [];
-const newScore = { name, score: score.toFixed(2), date: new Date().toLocaleDateString() };
-scores.push(newScore);
-localStorage.setItem('scores', JSON.stringify(scores));
+  const score = calculateScore(); 
+  console.log(score);
+  const scores = JSON.parse(localStorage.getItem('scores')) || [];
+  const newScore = { name, score: score.toFixed(2), date: new Date().toLocaleDateString() };
+  scores.push(newScore);
+  localStorage.setItem('scores', JSON.stringify(scores));
 }
 
-window.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("DOMContentLoaded", async function () {
 const username = sessionStorage.getItem("username");
-loadScores();
+await loadScores();
 calculateAndDisplayScore();
 
-window.addEventListener("budgetSubmitted", function (event) {
-  saveScore(username);
-  // Reload scores after saving
-  loadScores();
-  calculateAndDisplayScore();
 });
-});
+

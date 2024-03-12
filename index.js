@@ -14,17 +14,20 @@ app.use(express.static('public'));
 const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-let scores = [];
-
 // GetScores
+let info= {};
 apiRouter.get('/scores', (_req, res) => {
-  res.send(scores);
+  res.send(info);
 });
+
+function updateScores(data) {
+  info[data.username] = data.score;
+  
+}
 
 // SubmitScore
 apiRouter.post('/score', (req, res) => {
-  scores = updateScores(req.body, scores);
-  res.send(scores);
+  updateScores(req.body);
 });
 
 // Return the application's default page if the path is unknown
