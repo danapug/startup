@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 const config = require('./dbConfig.json');
 
-const url = `mongodb+srv://cs260:budget@cluster0.irdqs1w.mongodb.net/?`;
+const url = `mongodb+srv://`;
 const client = new MongoClient(url);
 const db = client.db('BudgetTracker');
 const userCollection = db.collection('username');
@@ -17,7 +17,7 @@ const config = require('./dbConfig.json');
 
 async function main() {
   // Connect to the database cluster
-  const url = `mongodb+srv://cs260:budget@cluster0.irdqs1w.mongodb.net/?`;
+  const url = `mongodb+srv:`;
   const client = new MongoClient(url);
   const db = client.db('BudgetTracker');
   const userCollection = db.collection('user');
