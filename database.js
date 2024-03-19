@@ -13,7 +13,7 @@ const userCollection = db.collection('username');
 
   
   const { MongoClient } = require('mongodb');
-const config = require('./mongoTest/dbConfig.json');
+const config = require('./dbConfig.json');
 
 async function main() {
   // Connect to the database cluster
