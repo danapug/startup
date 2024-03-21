@@ -1,3 +1,5 @@
+
+//old main.js code
 /*function login() {
     const usernameEl = document.querySelector("#name");
     const passwordEl = document.querySelector("#pass");
@@ -23,6 +25,9 @@
     }
 }*/
 
+
+
+//Jensen code
 (async () => {
     const userName = localStorage.getItem('userName');
     if (userName) {
@@ -44,8 +49,8 @@
   }
   
   async function loginOrCreate(endpoint) {
-    const userName = document.querySelector('#userName')?.value;
-    const password = document.querySelector('#userPassword')?.value;
+    const userName = document.querySelector('#name')?.value;
+    const password = document.querySelector('#pass')?.value;
     const response = await fetch(endpoint, {
       method: 'post',
       body: JSON.stringify({ userName: userName, password: password }),
@@ -66,7 +71,7 @@
     }
   }
   
-  function play() {
+  function budget() {
     window.location.href = 'budget.html';
   }
   

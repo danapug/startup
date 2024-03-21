@@ -115,6 +115,16 @@
     background-color: lightgray; 
   }
 
+  .input-group input {
+    width: 250px; /* Adjust the width as needed */
+}
+
+/* CSS for container */
+#loginControls {
+    display: inline-block; /* Display the container inline */
+    margin-right: 20px; /* Add some margin between the container and other elements */
+}
+
   footer a, footer span {
     align-items: center;
     color: antiquewhite;
