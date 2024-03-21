@@ -1,67 +1,18 @@
 
-/*const { MongoClient } = require('mongodb');
+const { MongoClient } = require('mongodb');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 const config = require('./dbConfig.json');
-
-const url = `mongodb+srv://`;
-const client = new MongoClient(url);
+const connectionString = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
+const client = new MongoClient(connectionString);
 const db = client.db('BudgetTracker');
 const userCollection = db.collection('username');
-//const scoreCollection = db.collection('score');*/
-
-
+const scoreCollection = db.collection('score');
   
-  const { MongoClient } = require('mongodb');
-const config = require('./dbConfig.json');
-
-async function main() {
-  // Connect to the database cluster
-  const url = `mongodb+srv:`;
-  const client = new MongoClient(url);
-  const db = client.db('BudgetTracker');
-  const userCollection = db.collection('user');
-
-  // Test that you can connect to the database
-  (async function testConnection() {
-    await client.connect();
-    await db.command({ ping: 1 });
-  })().catch((ex) => {
-    console.log(`Unable to connect to database with ${url} because ${ex.message}`);
-    process.exit(1);
-  });
-
-  // Insert a document
-  const poorStudent = {
-    name: 'Sally',
-    summary: 'Freshman student trying to budget',
-    saved: 200
-  };
-  await userCollection.insertOne(poorStudent);
-
-  const richStudent = {
-    name: 'Joe',
-    summary: 'Summer sales',
-    saved: 2000
-  }
-  await userCollection.insertOne(richStudent);
-
-  // Query the documents
-  const query = { name: 'richStudent'};
-  const options = {
-    sort: { saved: -1 },
-    limit: 10,
-  };
-
-  const cursor = userCollection.find(query, options);
-  const people = await cursor.toArray();
-  people.forEach((i) => console.log(i));
-}
-
   
 
 // This will asynchronously test the connection and exit the process if it fails
-/*(async function testConnection() {
+(async function testConnection() {
   await client.connect();
   await db.command({ ping: 1 });
 })().catch((ex) => {
@@ -111,4 +62,4 @@ module.exports = {
   createUser,
   addScore,
   getHighScores,
-};*/
+};

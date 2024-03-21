@@ -5,4 +5,3 @@ dist/
 dbkeys.sh
 cookie.txt
 dbConfig.json
-database.js
