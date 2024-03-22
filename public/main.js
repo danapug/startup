@@ -1,33 +1,3 @@
-
-//old main.js code
-/*function login() {
-    const usernameEl = document.querySelector("#name");
-    const passwordEl = document.querySelector("#pass");
-    const userExists = localStorage.getItem(JSON.stringify(usernameEl.value));
-    if (userExists == null) {
-        const user = {
-            username: usernameEl.value,
-            password: passwordEl.value
-        };
-        localStorage.setItem("username", usernameEl.value);
-        const userString = JSON.stringify(user);
-        localStorage.setItem("user", userString);
-        window.location.href = "budget.html";
-    }
-    else {
-        const a = passwordEl.value;
-        const b = localStorage.getItem(JSON.stringify (usernameEl.value));
-        const c = JSON.parse(b);
-        const d = c.password;
-        if (passwordEl.value == d) {
-            window.location.href = "budget.html";
-        }
-    }
-}*/
-
-
-
-//Jensen code
 (async () => {
     const userName = localStorage.getItem('userName');
     if (userName) {
@@ -49,7 +19,7 @@
   }
   
   async function loginOrCreate(endpoint) {
-    const userName = document.querySelector('#name')?.value;
+    const userName = document.querySelector('#user')?.value;
     const password = document.querySelector('#pass')?.value;
     const response = await fetch(endpoint, {
       method: 'post',
@@ -60,6 +30,8 @@
     });
   
     if (response.ok) {
+      console.log(userName);
+      console.log(password);
       localStorage.setItem('userName', userName);
       window.location.href = 'budget.html';
     } else {
@@ -84,7 +56,7 @@
   
   async function getUser(username) {
     let scores = [];
-    // See if we have a user with the given email.
+    // See if we have a user with the given username.
     const response = await fetch(`/api/user/${username}`);
     if (response.status === 200) {
       return response.json();
