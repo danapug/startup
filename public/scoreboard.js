@@ -26,4 +26,3 @@ async function loadScores() {
 window.addEventListener("DOMContentLoaded", async function () {
 await loadScores();
 });
-

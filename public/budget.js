@@ -1,6 +1,3 @@
-// Get references to category elements
-const categoryElements = document.querySelectorAll(".category");
-
 function calculateTotals() {
     const incomeInputs = document.querySelectorAll("#actual-scholarship, #actual-financial, #actual-income");
     const expenseInputs = document.querySelectorAll("#actual-rent, #actual-car, #actual-tuition, #actual-loans, #actual-insurance, #actual-clothing, #actual-books, #actual-activities, #actual-groceries, #actual-hair, #actual-tithing, #actual-date, #actual-misce");
@@ -24,37 +21,8 @@ function calculateTotals() {
     };
 }
 
-function saveBudgetedInputs() {
-    const budgetedInputs = document.querySelectorAll("[id^='budgeted-']");
-    for (const input of budgetedInputs) {
-      const userId = localStorage.getItem("userId"); // Assuming user ID from login or session
-      localStorage.setItem(`${userId}-${input.id}`, input.value);
-    }
-}
-
-/*function toggleSubmitButton(enabled) {
-  if (loginUser() == true) {
-    const submitButton = document.getElementById("button");
-    submitButton.disabled = !enabled;
-  }
-}
-
-// Call this function when the user logs in
-function userLoggedIn() {
-  toggleSubmitButton(true); // Enable the submit button
-}
-
-// Call this function when the user logs out
-function userLoggedOut() {
-  toggleSubmitButton(false); // Disable the submit button
-}*/
-
-
-
-
 const submitButton = document.getElementById("button");
 submitButton.addEventListener("click", async function (event) {
-  console.log("Function is called");
     try {
       const budgetSubmittedEvent = new Event('budgetSubmitted');
     window.dispatchEvent(budgetSubmittedEvent);
@@ -95,8 +63,6 @@ submitButton.addEventListener("click", async function (event) {
   }  
 });
 
-
-
 function updateScoresLocal(newScore) {
   let scores = [];
   const scoresText = localStorage.getItem('scores');
@@ -123,54 +89,3 @@ function updateScoresLocal(newScore) {
 
   localStorage.setItem('scores', JSON.stringify(scores));
 }
-
-
-
-
-function retrieveBudgetData() {
-  // Retrieve only budgeted values
-  
-    const budgetedScholarship = localStorage.getItem("budgeted-scholarship");
-    const budgetedFinancial = localStorage.getItem("budgeted-financial");
-    const budgetedIncome = localStorage.getItem("budgeted-income");
-
-    const budgetedRent = localStorage.getItem("budgeted-rent");
-    const budgetedCar = localStorage.getItem("budgeted-car");
-    const budgetedTuition = localStorage.getItem("budgeted-tuition");
-    const budgetedLoans = localStorage.getItem("budgeted-loans");
-    const budgetedInsurance = localStorage.getItem("budgeted-insurance");
-    const budgetedClothing = localStorage.getItem("budgeted-clothing");
-    const budgetedBooks = localStorage.getItem("budgeted-books");
-    const budgetedActivities = localStorage.getItem("budgeted-activities");
-    const budgetedGroceries = localStorage.getItem("budgeted-groceries");
-    const budgetedHair = localStorage.getItem("budgeted-hair");
-    const budgetedTithing = localStorage.getItem("budgeted-tithing");
-    const budgetedDate = localStorage.getItem("budgeted-date");
-    const budgetedMisce = localStorage.getItem("budgeted-misce");
-    const budgetedBank = localStorage.getItem("budgeted-bank");
-
-    // Use retrieved budgeted values to pre-populate budgeted input fields
-    document.querySelector("#budgeted-scholarship").value = budgetedScholarship;
-    document.querySelector("#budgeted-financial").value = budgetedFinancial;
-    document.querySelector("#budgeted-income").value = budgetedIncome;
-
-    document.querySelector("#budgeted-rent").value = budgetedRent;
-    document.querySelector("#budgeted-car").value = budgetedCar;
-    document.querySelector("#budgeted-tuition").value = budgetedTuition;
-    document.querySelector("#budgeted-loans").value = budgetedLoans;
-    document.querySelector("#budgeted-insurance").value = budgetedInsurance;
-    document.querySelector("#budgeted-clothing").value = budgetedClothing;
-    document.querySelector("#budgeted-books").value = budgetedBooks;
-    document.querySelector("#budgeted-activities").value = budgetedActivities;
-    document.querySelector("#budgeted-groceries").value = budgetedGroceries;
-    document.querySelector("#budgeted-hair").value = budgetedHair;
-    document.querySelector("#budgeted-tithing").value = budgetedTithing;
-    document.querySelector("#budgeted-date").value = budgetedDate;
-    document.querySelector("#budgeted-misce").value = budgetedMisce;
-    document.querySelector("#budgeted-bank").value = budgetedBank;
-}
-
-// Call retrieveBudgetData on page load or login
-retrieveBudgetData();
-//userLoggedIn();
-//userLoggedOut();

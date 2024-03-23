@@ -1,68 +1,65 @@
 body {
-    display: flex;
-    flex-direction: column;
-    min-width: 375px;
-    background-color: lightgray;
-  }
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 40px;
-    flex: 0 80px;
-    background-color:slategrey;
-  }
-
-  header h1 {
-    flex: 1;
-    color:antiquewhite;
-  }
-
-  menu {             /*aligns the 4 tabs*/
-    flex: 1;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-right: 40px;
-    font-weight: bold;
-    font-size: larger;
-    flex-direction: row;
-    list-style: none;
-  }
-  
-  nav menu li {
-    margin-left: 50px;       /*spaces out the 4 tabs */
-    flex: 1;
-  }
-
-  nav menu li a { 
-    color: antiquewhite;
-    text-decoration: none;         /*removes the hyperlink line*/
-    transition: color 0.5s;
-  }
-  nav menu li a:hover {
-    color: lightblue;
-  }
-
-  table thead {
-    background-color: antiquewhite;
-    font-weight: bolder;
-    color: black;
-    font-size: 40px;
-  }
-  
-  .container-fluid {
-    margin-top: 20px; /* Adjust the margin-top value as needed */
+  display: flex;
+  flex-direction: column;
+  min-width: 375px;
+  background-color: lightgray;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  flex: 0 80px;
+  background-color:slategrey;
 }
 
-  table th, table td {
-    padding: 30px;
-    width: 300px;
-    text-align: center;
-    border: 1px solid black; 
-    font-size: 25px;
-    font-weight: bold;
+header h1 {
+  flex: 1;
+  color:antiquewhite;
 }
 
+menu {             /*aligns the 4 tabs*/
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 40px;
+  font-weight: bold;
+  font-size: larger;
+  flex-direction: row;
+  list-style: none;
+}
 
- 
+nav menu li {
+  margin-left: 50px;       /*spaces out the 4 tabs */
+  flex: 1;
+}
+
+nav menu li a { 
+  color: antiquewhite;
+  text-decoration: none;         /*removes the hyperlink line*/
+  transition: color 0.5s;
+}
+nav menu li a:hover {
+  color: lightblue;
+}
+
+table thead {
+  background-color: antiquewhite;
+  font-weight: bolder;
+  color: black;
+  font-size: 40px;
+}
+
+.container-fluid {
+  margin-top: 20px; /* Adjust the margin-top value as needed */
+}
+
+table th, table td {
+  padding: 30px;
+  width: 300px;
+  text-align: center;
+  border: 1px solid black; 
+  font-size: 25px;
+  font-weight: bold;
+}
