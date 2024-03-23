@@ -1,6 +1,6 @@
 async function loadScores() {
-  let username = localStorage.getItem('userName')
-  let response = await fetch(`/api/scores/${username}`)
+  let currentUser = localStorage.getItem('userName')
+  let response = await fetch(`/api/scores/${currentUser}`)
   const scores = await response.json();
   const tableBodyEl = document.querySelector('#scores');
   console.log(scores);

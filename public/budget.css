@@ -84,7 +84,7 @@ body {
     max-width: 60px;
 }
 
-main form button[type="submit"] {
+button[type="submit"] {
     padding: 10px 20px; 
     background-color: slategray;
     color: white;
@@ -97,7 +97,7 @@ main form button[type="submit"] {
     display: block;
   }
 
-  main form button[type="submit"]:hover {
+  button[type="submit"]:hover {
     background-color: lightgray; 
   }
   
