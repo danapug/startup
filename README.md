@@ -119,6 +119,6 @@ Does budgeting and finances feel daunting? The Budget Tracker is perfect for col
 
 •	**Existing user –** Stores the budget scores under the same user if the user already exists.
 
-•	**Use MongoDB to store credentials –** Stores both username and their scores.
+•	**Use MongoDB to store credentials –** Stores both username and their scores in the database. The scoreboard only outputs that person's scores though.
 
 •	**Restricts functionality –** You cannot do anything until you have logged in. 
