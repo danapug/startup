@@ -112,8 +112,13 @@ Does budgeting and finances feel daunting? The Budget Tracker is perfect for col
 ### Login Deliverable
 # <span style="border-bottom: 2px solid black;"></span>
 •	**MongoDB Atlas database created -** done!
+
 •	**Stores data in MongoDB -** done!
+
 •	**User registration -** Creates a new account in the database.
+
 •	**Existing user –** Stores the budget scores under the same user if the user already exists.
+
 •	**Use MongoDB to store credentials –** Stores both username and their scores.
+
 •	**Restricts functionality –** You cannot do anything until you have logged in. 
