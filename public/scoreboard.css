@@ -44,30 +44,25 @@ body {
     color: lightblue;
   }
 
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
   table thead {
-    background-color: lightblue; 
-  }
-
-  table tbody {
-    border: 1px solid #ddd;
     background-color: antiquewhite;
+    font-weight: bolder;
+    color: black;
+    font-size: 40px;
   }
-
-  table td {
-    padding: 8px;
-    text-align: center;
-  }
+  
+  .container-fluid {
+    margin-top: 20px; /* Adjust the margin-top value as needed */
+}
 
   table th, table td {
-    padding: 8px;
+    padding: 30px;
+    width: 300px;
     text-align: center;
-    border: 1px solid black; /* Add black border to all cells */
+    border: 1px solid black; 
+    font-size: 25px;
+    font-weight: bold;
 }
+
 
  
