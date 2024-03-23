@@ -98,9 +98,13 @@ function updateScores(data) {
   
 }
 
+
 // SubmitScore
 secureApiRouter.post('/score', (req, res) => {
-  updateScores(req.body);
+  console.log(req.body);
+  DB.addScore(req.body);
+  res.status(201).send({accepted:true});
+
 });
 
 // Return the application's default page if the path is unknown

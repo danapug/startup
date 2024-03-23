@@ -32,9 +32,9 @@ function saveBudgetedInputs() {
     }
 }
 
-const submitButton = document.querySelector("button[type='submit']");
+const submitButton = document.getElementById("button");
 submitButton.addEventListener("click", async function (event) {
-
+  console.log("Function is called");
     try {
       const budgetSubmittedEvent = new Event('budgetSubmitted');
     window.dispatchEvent(budgetSubmittedEvent);
@@ -43,18 +43,18 @@ submitButton.addEventListener("click", async function (event) {
         const budgetedInputs = document.querySelectorAll("[id^='budgeted-']")
         const userID = localStorage.getItem("username");
         
-        await fetch("/api/score", {
+        let response = await fetch("/api/score", {
           method : "POST",
           headers : {
             "Content-Type" : "application/json"
           },
           body : JSON.stringify({
             username : userID,
-            //score : totals.savings.toFixed(2)
-            score : 50
+            score : totals.savings.toFixed(2)
+            //score : 50
           })
         });
-        
+        console.log(response.ok);
     const savingsMessage = document.querySelector('#savings-message');
     if (totals.savings > 0) {
       savingsMessage.textContent = `You saved: $ ${totals.savings.toFixed(2)}. Way to go, keep saving!!\n
@@ -67,13 +67,46 @@ submitButton.addEventListener("click", async function (event) {
       You earned: $ ${totals.income.toFixed(2)}\n
       You spent: $ ${totals.expenses.toFixed(2)}`;
     }
-        
-    } catch (error) {
-        console.error("An error occurred:", error);
-    }
-    
-    
+    // Store what the service gave us as the high scores
+    const scores = await response.json();
+    localStorage.setItem('scores', JSON.stringify(scores));
+  } catch {
+    // If there was an error then just track scores locally
+    this.updateScoresLocal(newScore);
+  }  
 });
+
+
+
+function updateScoresLocal(newScore) {
+  let scores = [];
+  const scoresText = localStorage.getItem('scores');
+  if (scoresText) {
+    scores = JSON.parse(scoresText);
+  }
+
+  let found = false;
+  for (const [i, prevScore] of scores.entries()) {
+    if (newScore > prevScore.score) {
+      scores.splice(i, 0, newScore);
+      found = true;
+      break;
+    }
+  }
+
+  if (!found) {
+    scores.push(newScore);
+  }
+
+  if (scores.length > 10) {
+    scores.length = 10;
+  }
+
+  localStorage.setItem('scores', JSON.stringify(scores));
+}
+
+
+
 
 function retrieveBudgetData() {
   // Retrieve only budgeted values
