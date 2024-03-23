@@ -27,10 +27,30 @@ function calculateTotals() {
 function saveBudgetedInputs() {
     const budgetedInputs = document.querySelectorAll("[id^='budgeted-']");
     for (const input of budgetedInputs) {
-      const userId = sessionStorage.getItem("userId"); // Assuming user ID from login or session
+      const userId = localStorage.getItem("userId"); // Assuming user ID from login or session
       localStorage.setItem(`${userId}-${input.id}`, input.value);
     }
 }
+
+/*function toggleSubmitButton(enabled) {
+  if (loginUser() == true) {
+    const submitButton = document.getElementById("button");
+    submitButton.disabled = !enabled;
+  }
+}
+
+// Call this function when the user logs in
+function userLoggedIn() {
+  toggleSubmitButton(true); // Enable the submit button
+}
+
+// Call this function when the user logs out
+function userLoggedOut() {
+  toggleSubmitButton(false); // Disable the submit button
+}*/
+
+
+
 
 const submitButton = document.getElementById("button");
 submitButton.addEventListener("click", async function (event) {
@@ -41,7 +61,7 @@ submitButton.addEventListener("click", async function (event) {
     const totals = calculateTotals();
         // Display savings message using totals
         const budgetedInputs = document.querySelectorAll("[id^='budgeted-']")
-        const userID = localStorage.getItem("username");
+        const userID = localStorage.getItem("userName");
         
         let response = await fetch("/api/score", {
           method : "POST",
@@ -51,7 +71,6 @@ submitButton.addEventListener("click", async function (event) {
           body : JSON.stringify({
             username : userID,
             score : totals.savings.toFixed(2)
-            //score : 50
           })
         });
         console.log(response.ok);
@@ -153,3 +172,5 @@ function retrieveBudgetData() {
 
 // Call retrieveBudgetData on page load or login
 retrieveBudgetData();
+//userLoggedIn();
+//userLoggedOut();

@@ -89,8 +89,10 @@ secureApiRouter.use(async (req, res, next) => {
 
 // GetScores
 let info= {};
-secureApiRouter.get('/scores', async (req, res) => {
-  res.send(info);
+secureApiRouter.get('/scores/:userName', async (req, res) => {
+  const score = await DB.getScore(req.params.userName);
+  res.send({score: 
+    score.score});
 });
 
 function updateScores(data) {

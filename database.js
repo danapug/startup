@@ -41,8 +41,10 @@ async function createUser(username, password) {
   return user;
 }
 
-function addScore(score) {
-  scoreCollection.insertOne(score);
+async function addScore(score) {
+  scoreCollection.findOneAndUpdate({username:score.username}, 
+    {$set:{score:score.score}}, 
+    {upsert:true})
 }
 
 function getHighScores() {
@@ -55,10 +57,15 @@ function getHighScores() {
   return cursor.toArray();
 }
 
+function getScore(userName) {
+  return scoreCollection.findOne({ username: userName });
+}
+
 module.exports = {
   getUser,
   getUserByToken,
   createUser,
   addScore,
+  getScore,
   getHighScores,
 };
