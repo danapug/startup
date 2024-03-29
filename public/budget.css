@@ -115,3 +115,9 @@ button[type="submit"] {
     top: 400px; /* Adjust for desired vertical placement */
     right: 10px;
   }
+
+  #user {
+    display: flex;
+    flex-direction: column-reverse; /* Messages will be stacked vertically in reverse order */
+    align-items: flex-start; /* Messages will align to the left */
+  }
