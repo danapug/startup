@@ -1,6 +1,5 @@
 // Event messages
 const BudgetEndEvent = 'budgetEnd';
-const BudgetStartEvent = 'budgetStart';
 
 let socket;
 // Functionality for peer communication using WebSocket
