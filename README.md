@@ -122,3 +122,14 @@ Does budgeting and finances feel daunting? The Budget Tracker is perfect for col
 •	**Use MongoDB to store credentials –** Stores both username and their scores in the database. The scoreboard only outputs that person's scores though.
 
 •	**Restricts functionality –** You cannot do anything until you have logged in. 
+
+### Websocket Deliverable
+# <span style="border-bottom: 2px solid black;"></span>
+•	**Backend listens for WebSocket connection -** done!
+
+•	**Frontend makes WebSocket connection -** done!
+
+•	**Data sent over WebSocket connection -** done!
+
+•	**WebSocket data displayed -** All usernames displayed once they have finished their budget. The score is not displayed since it is money and probably not the best idea to show how much someone saved in their budget.
+
