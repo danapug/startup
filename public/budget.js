@@ -3,6 +3,43 @@ const BudgetEndEvent = 'budgetEnd';
 const BudgetStartEvent = 'budgetStart';
 
 
+// Functionality for peer communication using WebSocket
+function configureWebSocket() {
+  const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+  this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+  this.socket.onopen = (event) => {
+    this.displayMsg('system', 'budget', 'connected');
+  };
+  this.socket.onclose = (event) => {
+    this.displayMsg('system', 'budget', 'disconnected');
+  };
+  this.socket.onmessage = async (event) => {
+    const msg = JSON.parse(await event.data.text());
+    if (msg.type === BudgetEndEvent) {
+      this.displayMsg('player', msg.from, `scored ${msg.value.score}`);
+    } else if (msg.type === BudgetStartEvent) {
+      this.displayMsg('player', msg.from, `started a new budget`);
+    }
+  };
+}
+
+function displayMsg(cls, from, msg) {
+  const chatText = document.querySelector('#savings-message');
+  chatText.innerHTML =
+    `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` + chatText.innerHTML;
+}
+
+function broadcastEvent(from, type, value) {
+  const event = {
+    from: from,
+    type: type,
+    value: value,
+  };
+  this.socket.send(JSON.stringify(event));
+}
+
+
+
 function calculateTotals() {
     const incomeInputs = document.querySelectorAll("#actual-scholarship, #actual-financial, #actual-income");
     const expenseInputs = document.querySelectorAll("#actual-rent, #actual-car, #actual-tuition, #actual-loans, #actual-insurance, #actual-clothing, #actual-books, #actual-activities, #actual-groceries, #actual-hair, #actual-tithing, #actual-date, #actual-misce");
@@ -28,25 +65,26 @@ function calculateTotals() {
 
 const submitButton = document.getElementById("button");
 submitButton.addEventListener("click", async function (event) {
-    try {
-      const budgetSubmittedEvent = new Event('budgetSubmitted');
+  try {
+    const budgetSubmittedEvent = new Event('budgetSubmitted');
     window.dispatchEvent(budgetSubmittedEvent);
     const totals = calculateTotals();
-        // Display savings message using totals
-        const budgetedInputs = document.querySelectorAll("[id^='budgeted-']")
-        const userID = localStorage.getItem("userName");
-        
-        let response = await fetch("/api/score", {
-          method : "POST",
-          headers : {
-            "Content-Type" : "application/json"
-          },
-          body : JSON.stringify({
-            username : userID,
-            score : totals.savings.toFixed(2)
-          })
-        });
-        console.log(response.ok);
+    // Display savings message using totals
+    const budgetedInputs = document.querySelectorAll("[id^='budgeted-']")
+    const userID = localStorage.getItem("userName");
+      
+    let response = await fetch("/api/score", {
+      method : "POST",
+      headers : {
+        "Content-Type" : "application/json"
+      },
+      body : JSON.stringify({
+        username : userID,
+        score : totals.savings.toFixed(2)
+      })
+    });
+    console.log(response.ok);
+    this.broadcastEvent(userID, BudgetEndEvent, response);
     const savingsMessage = document.querySelector('#savings-message');
     if (totals.savings > 0) {
       savingsMessage.textContent = `You saved: $ ${totals.savings.toFixed(2)}. Way to go, keep saving!!\n
@@ -59,18 +97,20 @@ submitButton.addEventListener("click", async function (event) {
       You earned: $ ${totals.income.toFixed(2)}\n
       You spent: $ ${totals.expenses.toFixed(2)}`;
     }
-    // Store what the service gave us as the high scores
+  // Store what the service gave us as the high scores
     const scores = await response.json();
     localStorage.setItem('scores', JSON.stringify(scores));
-  } catch {
-    // If there was an error then just track scores locally
-    this.updateScoresLocal(newScore);
+  } 
+  catch {
+  // If there was an error then just track scores locally
+  this.updateScoresLocal(newScore);
   }  
   try {
-    await wsHandler.configureWebSocket(); // Call the configureWebSocket method
-} catch (error) {
+    configureWebSocket(); // Call the configureWebSocket method
+  } 
+  catch (error) {
     console.error(error);
-}
+  }
 });
 
 function updateScoresLocal(newScore) {
@@ -101,40 +141,3 @@ function updateScoresLocal(newScore) {
 }
 
 
-// Functionality for peer communication using WebSocket
-class configureWebsocket {
-  constructor() {
-    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-    this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
-    this.socket.onopen = (event) => {
-      this.displayMsg('system', 'budget', 'connected');
-    };
-    this.socket.onclose = (event) => {
-      this.displayMsg('system', 'budget', 'disconnected');
-    };
-    this.socket.onmessage = async (event) => {
-      const msg = JSON.parse(await event.data.text());
-      if (msg.type === BudgetEndEvent) {
-        this.displayMsg('player', msg.from, `scored ${msg.value.score}`);
-      } else if (msg.type === BudgetStartEvent) {
-        this.displayMsg('player', msg.from, `started a new budget`);
-      }
-    };
-  }
-
-  displayMsg(cls, from, msg) {
-    const chatText = document.querySelector('#savings-message');
-    chatText.innerHTML =
-      `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` + chatText.innerHTML;
-  }
-
-  broadcastEvent(from, type, value) {
-    const event = {
-      from: from,
-      type: type,
-      value: value,
-    };
-    this.socket.send(JSON.stringify(event));
-  }
-}
-const wsHandler = new configureWebsocket();
