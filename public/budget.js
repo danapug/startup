@@ -2,35 +2,24 @@
 const BudgetEndEvent = 'budgetEnd';
 const BudgetStartEvent = 'budgetStart';
 
-
+let socket;
 // Functionality for peer communication using WebSocket
 function configureWebSocket() {
+  console.log("entered config")
   const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-  this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
-  this.socket.onopen = (event) => {
-    this.displayMsg('system', 'budget', 'connected');
-  };
-  this.socket.onclose = (event) => {
-    this.displayMsg('system', 'budget', 'disconnected');
-  };
-  this.socket.onmessage = async (event) => {
+  socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+  socket.onmessage = async (event) => {
     const msg = JSON.parse(await event.data.text());
     if (msg.type === BudgetEndEvent) {
-      this.displayMsg('player', msg.from, `ended their budget`);
-    } else if (msg.type === BudgetStartEvent) {
-      wss.clients.forEach((client) => {
-        if (client !== ws && client.readyState === WebSocket.OPEN) {
-          client.send(`${message.from} started a new budget`); 
-        }
-      });
-    }
+      displayMsg(`player ${msg.from} ended their budget`);
+    } 
   };
 }
 
-function displayMsg(cls, from, msg) {
+function displayMsg(msg) {
   const chatText = document.querySelector('#user');
   chatText.innerHTML =
-    `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` + chatText.innerHTML;
+    `<div class="event">${msg}</div>` + chatText.innerHTML;
 }
 
 function broadcastEvent(from, type) {
@@ -38,7 +27,7 @@ function broadcastEvent(from, type) {
     from: from,
     type: type
   };
-  this.socket.send(JSON.stringify(event));
+  socket.send(JSON.stringify(event));
 }
 
 
@@ -87,7 +76,7 @@ submitButton.addEventListener("click", async function (event) {
     })
   });
   console.log(response.ok);
-  this.broadcastEvent(userID, BudgetEndEvent);
+  broadcastEvent(userID, BudgetEndEvent);
   const savingsMessage = document.querySelector('#savings-message');
   if (totals.savings > 0) {
     savingsMessage.textContent = `You saved: $ ${totals.savings.toFixed(2)}. Way to go, keep saving!!\n
@@ -103,12 +92,8 @@ submitButton.addEventListener("click", async function (event) {
 // Store what the service gave us as the high scores
   const scores = await response.json();
   localStorage.setItem('scores', JSON.stringify(scores));
+})
 
-  try {
-    configureWebSocket(); // Call the configureWebSocket method
-  } 
-  catch (error) {
-    console.error(error);
-  }
-}.bind(this));
+
+configureWebSocket();
 
