@@ -16,24 +16,27 @@ function configureWebSocket() {
   this.socket.onmessage = async (event) => {
     const msg = JSON.parse(await event.data.text());
     if (msg.type === BudgetEndEvent) {
-      this.displayMsg('player', msg.from, `scored ${msg.value.score}`);
+      this.displayMsg('player', msg.from, `ended their budget`);
     } else if (msg.type === BudgetStartEvent) {
-      this.displayMsg('player', msg.from, `started a new budget`);
+      wss.clients.forEach((client) => {
+        if (client !== ws && client.readyState === WebSocket.OPEN) {
+          client.send(`${message.from} started a new budget`); 
+        }
+      });
     }
   };
 }
 
 function displayMsg(cls, from, msg) {
-  const chatText = document.querySelector('#savings-message');
+  const chatText = document.querySelector('#user');
   chatText.innerHTML =
     `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` + chatText.innerHTML;
 }
 
-function broadcastEvent(from, type, value) {
+function broadcastEvent(from, type) {
   const event = {
     from: from,
-    type: type,
-    value: value,
+    type: type
   };
   this.socket.send(JSON.stringify(event));
 }
@@ -63,81 +66,49 @@ function calculateTotals() {
     };
 }
 
+
 const submitButton = document.getElementById("button");
 submitButton.addEventListener("click", async function (event) {
-  try {
-    const budgetSubmittedEvent = new Event('budgetSubmitted');
-    window.dispatchEvent(budgetSubmittedEvent);
-    const totals = calculateTotals();
-    // Display savings message using totals
-    const budgetedInputs = document.querySelectorAll("[id^='budgeted-']")
-    const userID = localStorage.getItem("userName");
-      
-    let response = await fetch("/api/score", {
-      method : "POST",
-      headers : {
-        "Content-Type" : "application/json"
-      },
-      body : JSON.stringify({
-        username : userID,
-        score : totals.savings.toFixed(2)
-      })
-    });
-    console.log(response.ok);
-    this.broadcastEvent(userID, BudgetEndEvent, response);
-    const savingsMessage = document.querySelector('#savings-message');
-    if (totals.savings > 0) {
-      savingsMessage.textContent = `You saved: $ ${totals.savings.toFixed(2)}. Way to go, keep saving!!\n
-      You earned: $ ${totals.income.toFixed(2)}\n
-      You spent: $ ${totals.expenses.toFixed(2)}`;
-    } 
-    else {
-      savingsMessage.style.color = 'red';
-      savingsMessage.textContent = `You spent: $ ${-totals.savings.toFixed(2)} more than you made. Start saving!!\n
-      You earned: $ ${totals.income.toFixed(2)}\n
-      You spent: $ ${totals.expenses.toFixed(2)}`;
-    }
-  // Store what the service gave us as the high scores
-    const scores = await response.json();
-    localStorage.setItem('scores', JSON.stringify(scores));
+  const budgetSubmittedEvent = new Event('budgetSubmitted');
+  window.dispatchEvent(budgetSubmittedEvent);
+  const totals = calculateTotals();
+  // Display savings message using totals
+  const budgetedInputs = document.querySelectorAll("[id^='budgeted-']")
+  const userID = localStorage.getItem("userName");
+    
+  let response = await fetch("/api/score", {
+    method : "POST",
+    headers : {
+      "Content-Type" : "application/json"
+    },
+    body : JSON.stringify({
+      username : userID,
+      score : totals.savings.toFixed(2)
+    })
+  });
+  console.log(response.ok);
+  this.broadcastEvent(userID, BudgetEndEvent);
+  const savingsMessage = document.querySelector('#savings-message');
+  if (totals.savings > 0) {
+    savingsMessage.textContent = `You saved: $ ${totals.savings.toFixed(2)}. Way to go, keep saving!!\n
+    You earned: $ ${totals.income.toFixed(2)}\n
+    You spent: $ ${totals.expenses.toFixed(2)}`;
   } 
-  catch {
-  // If there was an error then just track scores locally
-  this.updateScoresLocal(newScore);
-  }  
+  else {
+    savingsMessage.style.color = 'red';
+    savingsMessage.textContent = `You spent: $ ${-totals.savings.toFixed(2)} more than you made. Start saving!!\n
+    You earned: $ ${totals.income.toFixed(2)}\n
+    You spent: $ ${totals.expenses.toFixed(2)}`;
+  }
+// Store what the service gave us as the high scores
+  const scores = await response.json();
+  localStorage.setItem('scores', JSON.stringify(scores));
+
   try {
     configureWebSocket(); // Call the configureWebSocket method
   } 
   catch (error) {
     console.error(error);
   }
-});
-
-function updateScoresLocal(newScore) {
-  let scores = [];
-  const scoresText = localStorage.getItem('scores');
-  if (scoresText) {
-    scores = JSON.parse(scoresText);
-  }
-
-  let found = false;
-  for (const [i, prevScore] of scores.entries()) {
-    if (newScore > prevScore.score) {
-      scores.splice(i, 0, newScore);
-      found = true;
-      break;
-    }
-  }
-
-  if (!found) {
-    scores.push(newScore);
-  }
-
-  if (scores.length > 10) {
-    scores.length = 10;
-  }
-
-  localStorage.setItem('scores', JSON.stringify(scores));
-}
-
+}.bind(this));
 
