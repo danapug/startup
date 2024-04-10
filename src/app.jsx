@@ -6,6 +6,7 @@ import { Login } from './login/login';
 import { About } from './about/about';
 import { Scoreboard } from './scoreboard/scoreboard';
 import { Budget } from './budget/budget';
+import { AuthState } from './login/authstate';
 
 
 
@@ -14,6 +15,10 @@ function NotFound() {
 }
 
 export default function App() {
+    const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
+    const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
+    const [authState, setAuthState] = React.useState(currentAuthState);
+
     return (
         <BrowserRouter>
     <header>
@@ -22,19 +27,23 @@ export default function App() {
             <menu>
                 <li className='nav-item'>
                     <NavLink className='nav-link' to=''>
-                    Login
+                        Login
                     </NavLink>
                 </li>
-                <li className='nav-item'>
-                    <NavLink className='nav-link' to='budget'>
-                        Budget
-                    </NavLink>
-                </li>
-                <li className='nav-item'>
-                    <NavLink className='nav-link' to='scoreboard'>
-                        Scoreboard
-                    </NavLink>
-                </li>
+                {authState === AuthState.Authenticated && (
+                    <li className='nav-item'>
+                        <NavLink className='nav-link' to='budget'>
+                            Budget
+                        </NavLink>
+                    </li>
+                )}
+                {authState === AuthState.Authenticated && (
+                    <li className='nav-item'>
+                        <NavLink className='nav-link' to='scoreboard'>
+                            Scoreboard
+                        </NavLink>
+                    </li>
+                )}
                 <li className='nav-item'>
                     <NavLink className='nav-link' to='about'>
                         About
@@ -46,7 +55,20 @@ export default function App() {
 
 
     <Routes>
-        <Route path='/' element={<Login />} exact />
+        <Route
+            path='/'
+            element={
+                <Login
+                    userName={userName}
+                    authState={authState}
+                    onAuthChange={(userName, authState) => {
+                        setAuthState(authState);
+                        setUserName(userName);
+                    }}
+                />
+        }
+        exact
+        />
         <Route path='/budget' element={<Budget />} />
         <Route path='/scoreboard' element={<Scoreboard />} />
         <Route path='/about' element={<About />} />
