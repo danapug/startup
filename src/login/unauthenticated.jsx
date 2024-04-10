@@ -36,17 +36,17 @@ export function Unauthenticated(props) {
   return (
     <>
         <div id="loginControls">
-            <div class="input-group mb-3">
+            <div className="input-group mb-3">
+                <div>
                 <p>Login to start budgeting</p>
-                <span class="input-group-text">😊</span>
-                <input class="form-control" type="text" id="user" placeholder="username" />
+                </div>
+                <span className="input-group-text">😊</span>
+                <input className="form-control" type="text" id="user" placeholder="username" />
             </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text">🔒</span>
-                <input class="form-control" type="password" id="pass" placeholder="password" />
+            <div className="input-group mb-3">
+                <span className="input-group-text">🔒</span>
+                <input className="form-control" type="password" id="pass" placeholder="password" />
             </div>
-            <button type="button" class="btn btn-primary" onclick="loginUser()">Login</button>
-            <button type="button" class="btn btn-primary" onclick="createUser()">Create</button>
             <Button variant='primary' onClick={() => loginUser()}>
             Login
             </Button>
