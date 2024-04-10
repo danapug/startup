@@ -16,7 +16,6 @@ function NotFound() {
 export default function App() {
     return (
         <BrowserRouter>
-    <body>
     <header>
         <h1>Budget Tracker</h1>
         <nav> 
@@ -49,18 +48,17 @@ export default function App() {
     <Routes>
         <Route path='/' element={<Login />} exact />
         <Route path='/budget' element={<Budget />} />
-        <Route path='/scoreboard' element={<Scoreboard/>} />
-        <Route path='/about' element={<About/>} />
-        <Route path='*' element={<NotFound/>} />
+        <Route path='/scoreboard' element={<Scoreboard />} />
+        <Route path='/about' element={<About />} />
+        <Route path='*' element={<NotFound />} />
     </Routes>
     
     
 
     <footer>
-        <span class = "text-reset"> Author:</span>
+        <span className = "text-reset"> Author:</span>
         <a href = "https://github.com/danapug/startup"> GitHub</a>
     </footer>
-</body>
 </BrowserRouter>
     );
 }
