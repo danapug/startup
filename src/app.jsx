@@ -18,6 +18,7 @@ export default function App() {
     const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
     const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
     const [authState, setAuthState] = React.useState(currentAuthState);
+    const [scores, setScores] = React.useState([]);
 
     return (
         <BrowserRouter>
@@ -70,7 +71,7 @@ export default function App() {
         exact
         />
         <Route path='/budget' element={<Budget />} />
-        <Route path='/scoreboard' element={<Scoreboard />} />
+        <Route path='/scoreboard' element={<Scoreboard setScores={setScores} />} />
         <Route path='/about' element={<About />} />
         <Route path='*' element={<NotFound />} />
     </Routes>

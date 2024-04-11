@@ -10,7 +10,8 @@ export function Scoreboard() {
             let currentUser = localStorage.getItem('userName');
             let response = await fetch(`/api/scores/${currentUser}`);
             const scoresData = await response.json();
-            setScores(scoresData);
+            setScores([scoresData]);
+            l
         }
 
         loadScores();

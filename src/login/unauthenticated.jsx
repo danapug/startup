@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Button from 'react-bootstrap/Button';
 import {MessageDialog} from './messageDialog';
 
@@ -7,6 +6,14 @@ export function Unauthenticated(props) {
   const [userName, setUserName] = React.useState(props.userName);
   const [password, setPassword] = React.useState('');
   const [displayError, setDisplayError] = React.useState(null);
+
+  const handleUserNameChange = (e) => {
+    setUserName(e.target.value);
+  };
+
+const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+};
 
   async function loginUser() {
     loginOrCreate(`/api/auth/login`);
@@ -19,7 +26,7 @@ export function Unauthenticated(props) {
   async function loginOrCreate(endpoint) {
     const response = await fetch(endpoint, {
       method: 'post',
-      body: JSON.stringify({email: userName, password: password}),
+      body: JSON.stringify({userName: userName, password: password}),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },
@@ -41,11 +48,11 @@ export function Unauthenticated(props) {
                 <p>Login to start budgeting</p>
                 </div>
                 <span className="input-group-text">😊</span>
-                <input className="form-control" type="text" id="user" placeholder="username" />
+                <input className="form-control" type="text" id="user" placeholder="username" value={userName} onChange={handleUserNameChange} />
             </div>
             <div className="input-group mb-3">
                 <span className="input-group-text">🔒</span>
-                <input className="form-control" type="password" id="pass" placeholder="password" />
+                <input className="form-control" type="password" id="pass" placeholder="password" value={password} onChange={handlePasswordChange} />
             </div>
             <Button variant='primary' onClick={() => loginUser()}>
             Login
