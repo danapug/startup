@@ -74,7 +74,6 @@ export function Budget() {
                 score: totals.savings.toFixed(2)
             })
         });
-        console.log(response.ok);
         broadcastEvent(userID, BudgetEndEvent);
         const savingsMessage = document.querySelector('#savings-message');
         if (totals.savings > 0) {

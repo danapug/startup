@@ -11,7 +11,6 @@ export function Scoreboard() {
             let response = await fetch(`/api/scores/${currentUser}`);
             const scoresData = await response.json();
             setScores([scoresData]);
-            l
         }
 
         loadScores();
