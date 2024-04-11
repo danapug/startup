@@ -133,3 +133,12 @@ Does budgeting and finances feel daunting? The Budget Tracker is perfect for col
 
 •	**WebSocket data displayed -** All usernames displayed once they have finished their budget. The score is not displayed since it is money and probably not the best idea to show how much someone saved in their budget.
 
+### **React Deliverable:**
+# <span style="border-bottom: 2px solid black;"></span>
+•	**Bundled using vite -** done!
+
+•	**Components -** Login, budgeting, and scoreboard are all functional components.
+
+•	**Router -** Routing between login and budget components.
+
+•	**Hooks –** used useState and useEffect to track changes in login state and for setting the scores.
