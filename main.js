@@ -70,4 +70,3 @@
       playControlEl.style.display = display;
     }
   }
-  

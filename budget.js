@@ -95,4 +95,3 @@ submitButton.addEventListener("click", async function (event) {
 
 
 configureWebSocket();
-
