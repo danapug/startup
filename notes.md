@@ -1,3 +1,268 @@
+# CS 260 Final Study Guide:
+## In-class Quizlet:
+paul george john
+![image](https://images-cdn.kahoot.it/907074b0-266a-4d57-82c3-9dcf71190893?auto=webp&width=1000)
+
+
+-What middleware matches?
+
+app.delete(/fav\/(.*)/, () => {})
+![image](https://images-cdn.kahoot.it/a5a33ddc-5363-46c0-84a8-b1957cb376ff?auto=webp&width=1000)
+
+
+-What document matches the mongodb query?
+
+{ name: "Walke", score: -55 }      (OR so it needed to be J. or have a score less than 3, this was the only score less than 3
+![image](https://images-cdn.kahoot.it/d0a8c0d5-2488-448f-9a92-ae103c7161d9?auto=webp&width=1000)
+
+
+
+-Why is hashing passwords a good idea?
+
+It improves security by making the password unreadable
+
+
+-What will console.log print?
+Client:Server:Hello
+![image](https://images-cdn.kahoot.it/f696d33d-3ee4-4937-be45-50513792defc?auto=webp&width=1000)
+
+
+
+-Value of websocket?
+
+It is a peer to peer relationship rather than client to server
+
+
+-Purposes of JSX:
+
+To render html from JavaScript, to componentize your html, to allow for composability of your html. JSX does not touch CSS.
+
+
+-What component with the url `/burger` render?
+
+B
+![image](https://images-cdn.kahoot.it/7e2b94e0-40d7-4a94-bc2b-d8bcdd40b6aa?auto=webp&width=1000)
+
+
+-The command "npm install ws" does the following: 
+
+locks the version of the websocket package for your application, adds the websocket source code to the node_modules directory, and adds a dependency to your package.json file.  This command does not add template code for websockets to your javascript.
+
+-What will component A initially display?
+
+tacofish
+![image](https://images-cdn.kahoot.it/eb05f83b-27b1-42ed-9c43-27e5705fe3fc?auto=webp&width=1000)
+
+
+-Fetch can be used in front-end and back-end
+
+
+
+-Linux daemon:
+executes independent of a user, starts when the computer is rebooted, PM2 is an example of a daemon, can fork other processes.
+
+
+## Class Notes
+### HTTP Service
+•	The symbolic name is called a domain name. Domain names are converted to IP address by doing a lookup in the Domain name system (DNS). To see an IP address, use the console command “dig”
+ 
+![image](https://raw.githubusercontent.com/webprogramming260/.github/main/profile/webServers/domainNames/domainNameParts.jpg)  
+•	TCP/IP Layers:
+
+o	Application: ex is HTTPS, Purpose: functionality like web browsing
+
+o	Transport: ex is TCP, Purpose: moving connection information packets
+
+o	Internet: ex is IP, Purpose: establishing connections
+
+o	Link: ex is Fiber/hardware, Purpose: physical connections
+
+•	Web server: a computing device that is hosting a web service that knows how to accept incoming internet connections and speak the HTTP application protocol.
+
+•	The same computing device commonly has multiple web services running, the trick is exposing the multiple services in a way that a connection can be made to each of them. Every network device allows for separate network connections by referring to a unique port number. Each service on the device starts up on a different port.
+
+•	Service Gateway/Reverse Proxy: a simple web service that listens on the common https port 443. The gateway then looks at the request and maps it to the other services running on different ports. 
+
+•	Our web server used the application Caddy as the gateway to our services.
+
+•	The DNA databse records that facilitate the mapping of domain names to IP addresses come in several flavors.
+
+o	A: address, this record is a straight mapping from a domain name to IP address
+
+o	CNAME: canonical name, record maps one domain name to another domain name. This acts as a domain name alias. For example, mapping byu.com to the same IP address as byu.edu so that either one could be used.
+
+•	All web programming requests between devices use HTTPS to exchange data.
+
+•	The web service provides the static frontend files along with functions to handle fetch requests for things like storing data persistently, providing security, running tasks, executing application logic that you don’t want your user to be able to see, and communicating with other users. The functionality provided by your web service represents the backend of your application.
+
+•	Endpoints(sometimes APIs): the functions provided by a web service. You access the web service endpoints from your frontend JS with the fetch function. 
+![image](https://raw.githubusercontent.com/webprogramming260/.github/main/profile/webServices/introduction/backEnd.png)
+ 
+•	The backend can also have fetch requests to other services (For example a database service)
+
+•	URL: (uniform resource locator) represents the location of a web resource. 
+
+•	The only parts of a URL that are required are the scheme and the domain name
+
+#<scheme>://<domain name>:<port>/<path>?<parameters>#<anchor>
+
+
+•	Port 80 is reserved for HTTP (hypertext transfer protocol) for web requests
+
+Port 443 is reserved for HTTPS
+
+Port 22 is reserved for SSH
+
+•	The web browser makes a HTTP request and the server will generate an HTTP response. To see these exchanges use the console command “curl”
+
+•	Common HTTP Request:
+
+o	GET: get the request resource
+
+o	POST: create a new resource (response should include a unique ID of the newly created resource)
+
+o	PUT: update a resource. 
+
+o	DELETE: delete a resource
+
+•	Status Codes standard to HTTP responses so that the client of a request can know how to interpret the response
+
+o	100: informational
+
+o	200: success
+
+o	300: redirect to some other location or that the previously cached resources is still valid
+
+o	400: client errors. The request is invalid
+
+o	500: server errors.
+
+•	HTTP Headers: specify metadata about a request or response. Includes things like how to handle security, caching, data formats, and cookies. Common headers are: Authorization, Accept, Content-Type, Cookie, Host, Origin, Content-Length
+
+•	Cookie: method to track state across requests because HTTP itself is stateless, one http request does not know anything about a previous or future request. Cookies are generated by a server and passed to the client as an HTTP header. **A server to store data on the client.
+
+•	Syntax for HTTP response:
+<version> <status code> <status string>
+[<header key: value>]*
+[
+
+  <body>
+]
+•	Syntax for HTTP request:
+<verb> <url path, parameters, anchor> <version>
+[<header key: value>]*
+[
+
+  <body>
+]
+    
+•	The basic usage of fetch takes a URL and returns a promise. The promise “then” function takes a callback function that is asynchronously called when the request URL content is obtained. If the returned content is of type 
+    
+•	Node.js: application for deploying JS outside of a browser. This is good for simple web servers, little projects
+
+•	Express: good for production-ready application that provides framework and full we b service. Does the following: routing requests for service endpoints, manipulating HTTP requests with JSON body content, generating HTTP responses, and using middleware to add functionality. 
+
+o	app.get('/store/:storeName', (req, res, next) => {
+ res.send({name: req.params.storeName});
+});
+
+•	// Wildcard - matches /store/x and /star/y
+app.put('/st*/:storeName', (req, res) => res.send({update: req.params.storeName}));
+
+•	// Pure regular expression
+app.delete(/\/store\/(.+)/, (req, res) => res.send({delete: req.params[0]}));
+
+
+### Data and Authentication Services:
+
+-MongoDB: does not have a rigid table definition, you can include some of the properties and it will still store that item for you.
+
+-When you run a program from the console, the program will automatically terminate when you close the console or if the computer 
+restarts. In order to keep programs running after a shutdown you need to register it as a daemon. Daemon: something that is always there working in the background. We want our web services to continue running as a daemon.
+
+### WebSocket
+-WebSocket connection: made using HTTP and then upgraded by the server to a WebSocket connection, the relationship changes to a peer-to-peer connection where either party can efficiently send data at any time. Websockets are only between two parties, so a conversation between a group of users, the server must act as the intermediary. Each peer first connects to the server, and then the server forwards messages amongst the peers. 
+
+### Security
+-10 Security No-No’s:
+
+1. Broken access control (doesn’t enforce permissions on users, so a non-admin is doing something only an admin should be able to)
+   
+2. Cryptographic Failtures (sensitive data is accessible)
+   
+3. Injection (an attacker is allowed to supply data that is then injected into a context where it violates the expected use of the user input)
+   
+4. Insecure Design (architectural flaws, when the app was created there was not a focus on security)
+   
+5. Security Misconfiguration (security misconfiguration attacks exploit the configuration of an application)
+    
+6. Vulnerable and outdated components (the longer an application has been deployed, the more likely it is that the attack surface and corresponding exploits of the application will increase)
+    
+7. Identification and authentication failures (any situation where a user’s identity can be impersonated or assumed by an attacker. For example, if an attacker can repeatedly attempt to guess a user’s password, then eventually they will be successful.)
+    
+8. software and data integrity failure (attacks that allow external software, processes, or data to compromise your application)
+    
+9. Security logging and monitoring failures (have a secure system that will store logs because the attacker will delete any trace that he was there, if you don’t have a system in place that is already logging everything)
+    
+10. Server side request forgery (causes the application service to make unintended internal requests, that utilized the service’s elevated privileges in order to expose internal data or services)
+
+### Web Frameworks:
+-Web frameworks modularize code, create single page applications, simplify reactivity, and support diverse hardware devices. 
+
+-React: combines html and javascript into a jsx file. CSS is declared in its own file. JSX is converted into valid HTML and JS using a preprocessor called Babel.
+
+-Using a web framework creates components, which enables code reuse as common application components often show up repeatedly. The component generates the user interface using render.
+
+-React Properties: the component receives the properties in its constructor and then can display them when it renders. 
+
+JSX:
+<div>Component: <Demo who="Walke" /><div>
+React component: 
+function Demo(props) {
+  return <b>Hello {props.who}</b>;
+}
+Resulting HTML:
+<div>Component: <b>Hello Walke</b></div>
+
+-React State: component state is created by calling React.useState hook function. The useState function returns a variable thata contains the current state and a function to update the state. 
+
+-The toolchain we used was Vite. This extends usage to include a full web framework toolchain that allows us to use JSX, minification, polyfills, and bundling for our applications. 
+
+-Web framework router: provides essential functionality for single page applications. With a multiple webpage application the headers, footers, navigation, and common components must be either duplicated in each html page or injected before the server sends the page to the browser. With a single page application, the browser only loads one html page and then js is used to manipulate the DOM and give it the appearance of multiple pages. 
+
+// Inject the router into the application root DOM element
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  // BrowserRouter component that controls what is rendered
+  // NavLink component captures user navigation requests
+  // Routes component defines what component is routed to
+  <BrowserRouter>
+    <div className='app'>
+      <nav>
+        <NavLink to='/'>Home</Link>
+        <NavLink to='/about'>About</Link>
+        <NavLink to='/users'>Users</Link>
+      </nav>
+
+      <main>
+        <Routes>
+          <Route path='/' element={<Home />} exact />
+          <Route path='/about' element={<About />} />
+          <Route path='/users' element={<Users />} />
+          <Route path='*' element={<Navigate to='/' replace />} />
+        </Routes>
+      </main>
+    </div>
+  </BrowserRouter>
+);
+
+-React enables reactivity with three major pieces of a react component: props, state, and render.
+
+
+
+
+
+
 # CS 260 Midterm Study Guide:
 ## In-class Quizlet:
 •	What is the output of const f = y => ++y; console.log(f(3))?
